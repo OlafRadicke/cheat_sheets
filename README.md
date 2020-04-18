@@ -11,3 +11,4 @@ Helpful tools for makedown
 --------------------------
 
 * [ghostwriter](http://github.com/wereturtle/ghostwriter)
+* Visual Code extention: *Markdown Preview Enhanced*

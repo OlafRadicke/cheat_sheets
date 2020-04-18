@@ -4,14 +4,16 @@ Helm cheat sheet
 Installation helm
 -----------------
 
-Download from [GitHub Project](https://github.com/helm/helm/releases):
+Check available versions: [GitHub Project](https://github.com/helm/helm/releases):
 
 ```bash
-HELMVERSION=3.0.2
+HELMVERSION=3.2.0-rc.1
 wget https://get.helm.sh/helm-v${HELMVERSION}-linux-amd64.tar.gz
 tar -xvzf ./helm-v${HELMVERSION}-linux-amd64.tar.gz
 sudo cp ./linux-amd64/helm  /usr/local/bin/helm
 ```
+Version 3.x is *triller less* ;-)
+
 
 Overview about available helm commands
 --------------------------------------
