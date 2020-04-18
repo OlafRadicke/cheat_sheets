@@ -1,11 +1,13 @@
-cheat sheets
+Cheat sheets
 ============
 
-* [Ansible](ansible/README.md)
+* [Ansible](ansible/)
+* [Azure cloud](azure/)
 * [Kubernetes and container](k8s_and_container/README.md)
-* [linux](linux/README.md)
+* [Linux](linux/)
 * [OpenStack](openstack.md)
-* [Terraform](terraform/README.md)
+* [Terraform](terraform/)
+* [Tools](tools/)
 
 Helpful tools for makedown
 --------------------------
