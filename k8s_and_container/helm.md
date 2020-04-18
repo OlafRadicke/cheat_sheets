@@ -116,6 +116,12 @@ Developing
 [ERROR] templates/: render error in "buildbot/templates/buildbot-worker-deployment.yaml": template: buildbot/templates/buildbot-worker-deployment.yaml:8:22: executing "buildbot/templates/buildbot-worker-deployment.yaml" at <.Values.worker_replicas>: map has no entry for key "worker_replicas"
 ```
 
+### Install from a local directory ###
+
+```bash
+helm install my-test-installation ./helm-charts/buildbot/
+```
+
 Known issue
 -----------
 

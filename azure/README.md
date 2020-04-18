@@ -29,8 +29,8 @@ And install over dnf:
 sudo dnf install azure-cli
 ```
 
-Login
------
+Login in azure cloud
+--------------------
 
 ```bash
 [or@augsburg03 cheat_sheets]$ az login
@@ -51,11 +51,38 @@ You have logged in. Now let us find all the subscriptions to which you have acce
 ]
 ```
 
-Sub sites
----------
+### List all azure accounts ###
 
-* []()
+```bash
+az account list
+```
 
+Working with azure
+------------------
+
+### Ge the configuration of a Kubernets clouster ###
+
+```bash
+[or@augsburg03 ansible]$ az aks get-credentials --resource-group "name_of_your_resource_group" --name "name_of_your_kubernetes_cluster"
+Merged "name_of_your_kubernetes_cluster" as current context in /home/or/.kube/config
+
+```
+
+### Open the Kubernetes deshbord ###
+
+```bash
+[or@augsburg03 local]$ az aks browse --resource-group name_of_your_resource_group --name name_of_your_resource_group
+Merged "name_of_your_resource_group" as current context in /tmp/tmppvlruefk
+Proxy running on http://127.0.0.1:8001/
+Press CTRL+C to close the tunnel...
+
+```
+
+### Get pulic IPs ###
+
+```bash
+az network public-ip list
+```
 
 External documentation
 ----------------------

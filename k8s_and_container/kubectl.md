@@ -1,15 +1,25 @@
 kubectl (k8s/k3s) cheat sheet
 =============================
 
-Remote control
---------------
+Installation
+------------
+
+```bash
+sudo dnf install kubernetes-client
+```
+
+Configuration
+-------------
+
+### Remote control (k3s) ###
+
 
 For remote controll of k3s, you have copy the file /etc/rancher/k3s/k3s.yaml 
 to your control server, in the homedirectory of the control user:
 
 ```bash
 mkdir ~/.kube/
-scp k3s-server:/etc/rancher/k3s/k3s.yaml ~/.kube/config
+scp root@k3s-server:/etc/rancher/k3s/k3s.yaml ~/.kube/config
 ```
 
 And change the server adress in the configuration.
@@ -18,10 +28,15 @@ And change the server adress in the configuration.
 sed -i "s#server: https://localhost:6443#server: https://k3s-server:6443#g" ~/.kube/config
 ```
 
-List pods
----------
+### Remote control (Azure Cloud) ###
 
-Enter:
+See [Azure cheats](../azure/)
+
+
+Overview cluster
+----------------
+
+### List pods ###
 
 ```bash
 kubectl get pod
@@ -33,28 +48,20 @@ From all name spaces, enter:
 kubectl get pods -A
 ```
 
-Get cluster nodes
------------------
-
-Enter:
+### Get cluster nodes ###
 
 ```bash
 kubectl get nodes
 ```
 
-List pod ports
---------------
+### List pod ports ###
 
-Enter:
 
 ```bash
 kubectl get svc
 ```
 
-Check cluster state
--------------------
-
-Enter:
+### Check cluster state ###
 
 ```bash
 kubectl cluster-info dump
@@ -71,27 +78,30 @@ across multiple namespaces such as Development, Staging and Production. If
 you want to reach across namespaces, you need to use the fully qualified
 domain name (FQDN)
 
-List the current namespaces
----------------------------
+### List the current namespaces ###
 
 ```bash
 kubectl get namespaces
 ```
 
-Creating a new namespace
-------------------------
+### Creating a new namespace ###
 
 ```bash
 kubectl create namespace <insert-namespace-name-here>
 ```
 
-Deleting a namespace
---------------------
+### Deleting a namespace ###
 
 This deletes everything under the namespace!
 
 ```bash
 kubectl delete namespaces development
+```
+
+### Delete all pods and services in a namespace ###
+
+```bash
+kubectl -n my-namespace delete po,svc --all
 ```
 
 Service resources
@@ -101,82 +111,71 @@ In Kubernetes, a Service is an abstraction which defines a logical set of Pods
 and a policy by which to access them (sometimes this pattern is called a
 micro-service).
 
-List services
--------------
+### List services ###
 
 ```bash
 kubectl get service
 ```
 
-Delete deployments
-------------------
+### Delete deployments ###
 
 ```bash
 kubectl delete deployment my-pod
 ```
 
-Delete all pods and services in a namespace
--------------------------------------------
-
-```bash
-kubectl -n my-namespace delete po,svc --all
-```
-
 Troubleshooting
 ---------------
 
-```bash
+### Get pod details ###
 
-[or@augsburg03 tmp]$ kubectl describe pod lb-69967cfdb-jlsf5
-Name:           lb-69967cfdb-jlsf5
-Namespace:      buildbot-test
-Priority:       0
-Node:           aks-default-25584779-vmss000000/10.240.0.4
-Start Time:     Sun, 29 Mar 2020 15:05:11 +0200
-Labels:         app=lb
-                pod-template-hash=69967cfdb
-Annotations:    <none>
-Status:         Pending
-IP:             
-Controlled By:  ReplicaSet/lb-69967cfdb
-Containers:
-  lb:
-    Container ID:   
-    Image:          dockercloud/haproxy
-    Image ID:       
-    Ports:          8080/TCP, 9989/TCP
-    Host Ports:     0/TCP, 0/TCP
-    State:          Waiting
-      Reason:       ContainerCreating
-    Ready:          False
-    Restart Count:  0
-    Environment:    <none>
-    Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from default-token-4ck7q (ro)
-Conditions:
-  Type              Status
-  Initialized       True 
-  Ready             False 
-  ContainersReady   False 
-  PodScheduled      True 
-Volumes:
-  lb-claim0:
-    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-    ClaimName:  lb-claim0
-    ReadOnly:   false
-  default-token-4ck7q:
-    Type:        Secret (a volume populated by a Secret)
-    SecretName:  default-token-4ck7q
-    Optional:    false
-QoS Class:       BestEffort
-Node-Selectors:  <none>
-Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
-                 node.kubernetes.io/unreachable:NoExecute for 300s
-Events:
-  Type     Reason              Age                  From                                      Message
-  ----     ------              ----                 ----                                      -------
-  Warning  FailedScheduling    29m (x5 over 29m)    default-scheduler                         pod has unbound immediate PersistentVolumeClaims
-  Normal   Scheduled           29m                  default-scheduler                         Successfully assigned buildbot-test/lb-69967cfdb-jlsf5 to aks-default-25584779-vmss000000
-  Warning  FailedMount         2m6s (x12 over 27m)  kubelet, aks-default-25584779-vmss000000  Unable to mount volumes for pod "lb-69967cfdb-jlsf5_buildbot-test(be73f78b-773d-4666-8325-ff9c05097817)": timeout expired waiting for volumes to attach or mount for pod "buildbot-test"/"lb-69967cfdb-jlsf5". list of unmounted volumes=[lb-claim0]. list of unattached volumes=[lb-claim0 default-token-4ck7q]
-  Warning  FailedAttachVolume  30s (x22 over 29m)   attachdetach-controller                   AttachVolume.Attach failed for volume "pvc-7f8ea625-3605-4941-bda3-72a1f09b665f" : compute.VirtualMachineScaleSetVMsClient#Update: Failure sending request: StatusCode=400 -- Original Error: Code="InvalidParameter" Message="Requested operation cannot be performed because the VM size Standard_D2_v2 does not support the storage account type Premium_LRS of disk 'kubernetes-dynamic-pvc-7f8ea625-3605-4941-bda3-72a1f09b665f'. Consider updating the VM to a size that supports Premium storage." Target="dataDisk.managedDisk.storageAccountType"
+```bash
+kubectl describe pod lb-69967cfdb-jlsf5
+
+```
+
+### Get details of all Pods ###
+
+```bash
+kubectl describe pods
+```
+
+### Adhoc (network) checks ###
+
+```bash
+$ [or@augsburg03 local]$ kubectl exec loadbalancer-85df47799d-94jms -- ping -c 1 10.0.224.30
+PING 10.0.224.30 (10.0.224.30): 56 data bytes
+
+--- 10.0.224.30 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+command terminated with exit code 1
+
+```
+
+### Get logs of http-application-routing ###
+
+```bash
+kubectl logs -f deploy/
+
+```
+
+### Attach on crashed pods ###
+
+```bash
+[or@augsburg03 low_level_k8s_buildbot_deployment]$ kubectl run buildbot-demo --image=olafradicke/alternativ_buildbot_master:vv2.7.0r6 --restart=Never
+pod/buildbot-demo created
+
+[or@augsburg03 low_level_k8s_buildbot_deployment]$ kubectl get pods
+NAME                             READY   STATUS             RESTARTS   AGE
+buildbot-demo                    1/1     Running            0          11s
+buildbot-f6ff5c469-5frw9         0/1     CrashLoopBackOff   9          22m
+db-7875648874-6wzvm              1/1     Running            0          26m
+loadbalancer-846f8b8dc4-djfjv    1/1     Running            0          26m
+mq-5f79c957d4-cmwnq              1/1     Running            0          25m
+webapp-74c75bbb86-87gkq          1/1     Running            0          25m
+worker-5665cb8df5-zd4g6          1/1     Running            7          25m
+
+[or@augsburg03 low_level_k8s_buildbot_deployment]$ kubectl exec -it buildbot-demo sh
+/srv/buildbot $ ls
+buildbot.tac       http.log           master.cfg         master.cfg.sample  start_buildbot.sh  twistd.pid
+/srv/buildbot $ 
 ```

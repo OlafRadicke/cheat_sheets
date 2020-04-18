@@ -4,10 +4,13 @@ Terraform cheat sheets
 Terraform install
 -----------------
 
-* [download terraform](https://www.terraform.io/downloads.html)
+Check available version on [terraform download site](https://www.terraform.io/downloads.html).
 
 ```bash
-unzip ./terraform_0.12.18_linux_amd64.zip
+TERRAFORMVERSION=0.12.24 && \
+cd /tmp && \
+wget https://releases.hashicorp.com/terraform/${TERRAFORMVERSION}/terraform_${TERRAFORMVERSION}_linux_amd64.zip && \
+unzip ./terraform_${TERRAFORMVERSION}_linux_amd64.zip && \
 sudo mv ./terraform /usr/local/bin/
 ```
 
