@@ -101,7 +101,7 @@ helm list -aq
 ----------------------
 
 ```bash
-helm delete my-postgresql-installation 
+helm delete my-postgresql-installation --namespace testenv
 ```
 
 Developing
@@ -119,7 +119,15 @@ Developing
 ### Install from a local directory ###
 
 ```bash
-helm install my-test-installation ./helm-charts/buildbot/
+helm install --namespace testenv my-test-installation ./helm-charts/buildbot/
+```
+
+### Install from a local directory ###
+
+Afeter local changes:
+
+```bash
+helm upgrade --namespace testenv my-test-installation ./helm-charts/buildbot/
 ```
 
 Known issue
