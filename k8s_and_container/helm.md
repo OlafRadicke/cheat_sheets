@@ -122,12 +122,18 @@ Developing
 helm install --namespace testenv my-test-installation ./helm-charts/buildbot/
 ```
 
-### Install from a local directory ###
+### Upgrade from a local directory ###
 
 Afeter local changes:
 
 ```bash
 helm upgrade --namespace testenv my-test-installation ./helm-charts/buildbot/
+```
+
+### Upgrade with recreate of pods ###
+
+```bash
+helm upgrade  --recreate-pods --namespace testenv my-test-installation ./helm-charts/buildbot/
 ```
 
 Known issue
