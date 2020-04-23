@@ -87,26 +87,20 @@ az network public-ip list
 ### Get limits of a location ###
 
 ```bash
-[or@augsburg02 bootstrap_azure_aks]$ az vm list-usage --location westeurope  --output yaml
-- currentValue: '0'
-  limit: '2500'
-  localName: Availability Sets
-  name:
-    localizedValue: Availability Sets
-    value: availabilitySets
-- currentValue: '0'
-  limit: '10'
-  localName: Total Regional vCPUs
-  name:
-    localizedValue: Total Regional vCPUs
-    value: cores
-- currentValue: '0'
-  limit: '25000'
-  localName: Virtual Machines
-  name:
-    localizedValue: Virtual Machines
-    value: virtualMachines
-[..]
+[or@augsburg02 bootstrap_azure_aks]$ az vm list-usage --location westeurope  --output table
+Name                               CurrentValue    Limit
+---------------------------------  --------------  -------
+Availability Sets                  0               2500
+Total Regional vCPUs               0               10
+Virtual Machines                   0               25000
+Virtual Machine Scale Sets         0               2500
+Dedicated vCPUs                    0               3000
+Total Regional Low-priority vCPUs  0               10
+Standard Dv2 Family vCPUs          0               10
+Basic A Family vCPUs               0               10
+Standard A0-A7 Family vCPUs        0               10
+
+[...]
 ```
 
 External documentation
