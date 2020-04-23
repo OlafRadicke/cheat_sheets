@@ -84,6 +84,31 @@ Press CTRL+C to close the tunnel...
 az network public-ip list
 ```
 
+### Get limits of a location ###
+
+```bash
+[or@augsburg02 bootstrap_azure_aks]$ az vm list-usage --location westeurope  --output yaml
+- currentValue: '0'
+  limit: '2500'
+  localName: Availability Sets
+  name:
+    localizedValue: Availability Sets
+    value: availabilitySets
+- currentValue: '0'
+  limit: '10'
+  localName: Total Regional vCPUs
+  name:
+    localizedValue: Total Regional vCPUs
+    value: cores
+- currentValue: '0'
+  limit: '25000'
+  localName: Virtual Machines
+  name:
+    localizedValue: Virtual Machines
+    value: virtualMachines
+[..]
+```
+
 External documentation
 ----------------------
 
