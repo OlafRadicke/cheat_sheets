@@ -79,6 +79,22 @@ helm search repo gitlab
 helm show chart stable/gitlab-ce 
 ```
 
+### Get and configure chart variables ###
+
+Get variables of a chart:
+
+```bash
+helm show values stable/mariadb
+```
+
+Set variables of a chart:
+
+```bash
+$ echo '{mariadbUser: user0, mariadbDatabase: user0db}' > config.yaml
+$ helm install -f config.yaml stable/mariadb --generate-name
+```
+
+
 ### Install a chart ###
 
 ```bash
@@ -119,7 +135,7 @@ Developing
 ### Install from a local directory ###
 
 ```bash
-helm install --namespace testenv my-test-installation ./helm-charts/buildbot/
+helm install --create-namespace --namespace testenv my-test-installation ./helm-charts/buildbot/
 ```
 
 ### Upgrade from a local directory ###
