@@ -6,6 +6,7 @@ Cheat sheets
 * [Kubernetes and container](k8s_and_container/README.md)
 * [Linux](linux/)
 * [OpenStack](openstack.md)
+* [CI/CD and Release management](cicd/README.md)
 * [Terraform](terraform/)
 * [Tools](tools/)
 

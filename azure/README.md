@@ -103,6 +103,25 @@ Standard A0-A7 Family vCPUs        0               10
 [...]
 ```
 
+Get list of vm sizes
+--------------------
+
+```bash
+[or@augsburg02 bootstrap_azure_aks]$ az vm list-sizes --location "westeurope" --output table
+MaxDataDiskCount    MemoryInMb    Name                    NumberOfCores    OsDiskSizeInMb    ResourceDiskSizeInMb
+------------------  ------------  ----------------------  ---------------  ----------------  ----------------------
+2                   512           Standard_B1ls           1                1047552           4096
+2                   2048          Standard_B1ms           1                1047552           4096
+2                   1024          Standard_B1s            1                1047552           4096
+4                   8192          Standard_B2ms           2                1047552           16384
+4                   4096          Standard_B2s            2                1047552           8192
+8                   16384         Standard_B4ms           4                1047552           32768
+16                  32768         Standard_B8ms           8                1047552           65536
+16                  49152         Standard_B12ms          12               1047552           98304
+32                  65536         Standard_B16ms          16               1047552           131072
+```
+
+
 External documentation
 ----------------------
 
