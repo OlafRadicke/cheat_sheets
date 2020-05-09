@@ -121,6 +121,16 @@ MaxDataDiskCount    MemoryInMb    Name                    NumberOfCores    OsDis
 32                  65536         Standard_B16ms          16               1047552           131072
 ```
 
+Price examples
+--------------
+
+|name            | cors | ram | disk | price |
+|----------------|------|-----|------|-------|
+| Standard_B2ms  | 2    | 8   | 16   | 0,037 |
+| Standard_D2_v3 | 2    | 8   | 16   | 0,051 |
+| Standard_D4_v3 | 4    | 16  | 100  | 0,102 |
+| Standard_H8    | 8    | 56  | 1000 | 0,492 |
+
 
 External documentation
 ----------------------

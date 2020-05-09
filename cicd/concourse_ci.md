@@ -54,14 +54,10 @@ Enter:
 
 
 
-
-
-
-
-
 Links
 -----
 
 * [Projekt page](https://concourse-ci.org/)
 * [Helm chart](github.com/concourse/concourse-chart)
 * [Tutorial](https://concoursetutorial.com/basics/task-hello-world/)
+* [Resource types](https://github.com/concourse/resource-types)
