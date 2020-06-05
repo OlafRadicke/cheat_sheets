@@ -70,6 +70,12 @@ For installation enter
 sudo k3os install
 ```
 
+Find the kube config:
+
+```bash
+ sudo cat /etc/rancher/k3s/k3s.yaml
+ ```
+
 RancherOS
 ---------
 
