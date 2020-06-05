@@ -76,6 +76,12 @@ Find the kube config:
  sudo cat /etc/rancher/k3s/k3s.yaml
  ```
 
+Get cluster token. Enter on the master:
+
+```bash
+sudo cat  /var/lib/rancher/k3s/server/node-token
+```
+
 RancherOS
 ---------
 
