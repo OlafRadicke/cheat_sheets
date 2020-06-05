@@ -61,6 +61,12 @@ k3s
 k3os
 ----
 
+For installation enter
+
+```bash
+sudo k3os install
+```
+
 RancherOS
 ---------
 
