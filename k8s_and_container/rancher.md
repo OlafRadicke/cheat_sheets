@@ -11,11 +11,10 @@ Rancher
 
 ***Node: ssh key with password are not working with k3os!***
 
-Example:
+Example (rancker/RKE):
 
 ```yaml
 ---
-
 hostname: rancheros-01
 ssh_authorized_keys:
   -   ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzNWhN/MJbTHy3iqERpb2KK0tbj7aPAU/[...]]9DI8= radickeo@NB-FF-654
@@ -23,6 +22,26 @@ rancher:
   docker:
     tls: true
   resize_device: /dev/sda
+```
+
+Agent example (k3os/k3s):
+
+```yaml
+---
+hostname: kube-poc-02.fondsfinanz.local
+ssh_authorized_keys:
+- ssh-rsa AAAAB3Nz[...]]S6KnOK6U= radickeo@NB-FF-654
+k3os:
+  dns_nameservers:
+  - 8.8.8.8
+  - 1.1.1.1
+  ntp_servers:
+  - 0.de.pool.ntp.org
+  - 1.de.pool.ntp.org
+  server_url: https://192.168.178.72:6443
+  token: ThisClusterConfigurationIsNeverForProduction
+  k3s_args:
+  - agent
 ```
 
 Validating a Configuration File:
