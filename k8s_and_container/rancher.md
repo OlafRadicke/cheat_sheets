@@ -82,6 +82,9 @@ Get cluster token. Enter on the master:
 sudo cat  /var/lib/rancher/k3s/server/node-token
 ```
 
+k3s configuration is located in  /k3os/system/config.yaml
+
+
 RancherOS
 ---------
 
