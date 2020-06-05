@@ -3,9 +3,13 @@ Rancher
 
 * [About concepts](https://rancher.com/blog/2019/2019-02-04-rancher-vs-rke/)
 
+
+
 ### Cloud-Config ###
 
 * [Documentation](https://rancher.com/docs/os/v1.x/en/configuration/#cloud-config)
+
+***Node: ssh key with password are not working with k3os!***
 
 Example:
 
@@ -48,8 +52,6 @@ Rollut the cluster configuration:
 ```bash
 rke -d up
 ```
-
-
 
 k3s
 ---
