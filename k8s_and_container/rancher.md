@@ -54,12 +54,13 @@ rke -d up
 k3s
 ---
 
-* [Documentation](https://github.com/rancher/k3os)
 * [High Availability with an External DB](https://rancher.com/docs/k3s/latest/en/installation/ha/)
 
 
 k3os
 ----
+
+* [Documentation](https://github.com/rancher/k3os)
 
 For installation enter
 
