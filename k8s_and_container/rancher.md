@@ -58,6 +58,27 @@ k3s
 
 * [High Availability with an External DB](https://rancher.com/docs/k3s/latest/en/installation/ha/)
 
+Cluster access (only on Master):
+
+```bash
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+kubectl get pods --all-namespaces
+```
+
+Add a worker to a cluster:
+
+```bash
+ sudo k3s agent --server https://192.168.178.72:6443  --token ThisClusterConfigurationIsNeverForProduction
+```
+
+With label:
+
+```bash
+ sudo k3s agent --server https://192.168.178.72:6443 \
+      --token ThisClusterConfigurationIsNeverForProduction \
+      --node-name kube-poc-02 \
+      --node-label worker
+```
 
 k3os
 ----
@@ -83,6 +104,7 @@ sudo cat  /var/lib/rancher/k3s/server/node-token
 ```
 
 k3s configuration is located in  /k3os/system/config.yaml
+
 
 
 RancherOS
