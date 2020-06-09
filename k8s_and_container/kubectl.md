@@ -61,6 +61,13 @@ kubectl get nodes
 kubectl get svc
 ```
 
+### Display CPU/Memory/Storage ####
+
+```bash
+kubectl top node
+kubectl top pod -A
+```
+
 ### Check cluster state ###
 
 ```bash
