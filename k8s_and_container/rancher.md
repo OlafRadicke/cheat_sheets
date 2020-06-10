@@ -3,15 +3,18 @@ Rancher
 
 * [About concepts](https://rancher.com/blog/2019/2019-02-04-rancher-vs-rke/)
 
+
+
 ### Cloud-Config ###
 
 * [Documentation](https://rancher.com/docs/os/v1.x/en/configuration/#cloud-config)
 
-Example:
+***Node: ssh key with password are not working with k3os!***
+
+Example (rancker/RKE):
 
 ```yaml
 ---
-
 hostname: rancheros-01
 ssh_authorized_keys:
   -   ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzNWhN/MJbTHy3iqERpb2KK0tbj7aPAU/[...]]9DI8= radickeo@NB-FF-654
@@ -19,6 +22,26 @@ rancher:
   docker:
     tls: true
   resize_device: /dev/sda
+```
+
+Agent example (k3os/k3s):
+
+```yaml
+---
+hostname: kube-poc-02.fondsfinanz.local
+ssh_authorized_keys:
+- ssh-rsa AAAAB3Nz[...]]S6KnOK6U= radickeo@NB-FF-654
+k3os:
+  dns_nameservers:
+  - 8.8.8.8
+  - 1.1.1.1
+  ntp_servers:
+  - 0.de.pool.ntp.org
+  - 1.de.pool.ntp.org
+  server_url: https://192.168.178.72:6443
+  token: ThisClusterConfigurationIsNeverForProduction
+  k3s_args:
+  - agent
 ```
 
 Validating a Configuration File:
@@ -49,13 +72,32 @@ Rollut the cluster configuration:
 rke -d up
 ```
 
-
-
 k3s
 ---
 
 * [High Availability with an External DB](https://rancher.com/docs/k3s/latest/en/installation/ha/)
 
+Cluster access (only on Master):
+
+```bash
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+kubectl get pods --all-namespaces
+```
+
+Add a worker to a cluster:
+
+```bash
+ sudo k3s agent --server https://192.168.178.72:6443  --token ThisClusterConfigurationIsNeverForProduction
+```
+
+With label:
+
+```bash
+ sudo k3s agent --server https://192.168.178.72:6443 \
+      --token ThisClusterConfigurationIsNeverForProduction \
+      --node-name kube-poc-02 \
+      --node-label worker
+```
 
 k3os
 ----
@@ -67,6 +109,22 @@ For installation enter
 ```bash
 sudo k3os install
 ```
+
+Find the kube config:
+
+```bash
+ sudo cat /etc/rancher/k3s/k3s.yaml
+ ```
+
+Get cluster token. Enter on the master:
+
+```bash
+sudo cat  /var/lib/rancher/k3s/server/node-token
+```
+
+k3s configuration is located in  /k3os/system/config.yaml
+
+
 
 RancherOS
 ---------
