@@ -16,6 +16,13 @@ kubectl create secret docker-registry \
         secret/regcred created
 ```
 
+Get secrets
+-----------
+
+```bash
+kubectl get secrets
+```
+
 Delete a secret
 ---------------
 
