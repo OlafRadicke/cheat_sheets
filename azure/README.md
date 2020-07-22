@@ -126,6 +126,8 @@ Price examples
 
 |name            | cors | ram | disk | price |
 |----------------|------|-----|------|-------|
+| Standard_A1_v2 | 1    | 2   | 10   | 0,008 |
+| Standard_A2_v2 | 2    | 4   | 20   | 0,017 |
 | Standard_B2ms  | 2    | 8   | 16   | 0,037 |
 | Standard_D2_v3 | 2    | 8   | 16   | 0,051 |
 | Standard_D4_v3 | 4    | 16  | 100  | 0,102 |

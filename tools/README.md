@@ -4,8 +4,10 @@ List of helpful tools
 * [journalctl](journalctl.md): System logs
 * *neofetch:* CLI system information tool written in Bash
 * *htop:* Interactive process viewer
-* *ghostwriter:* Cross-platform, aesthetic, distraction-free Markdown editor
-* *pandoc:* Conversion between markup formats
+* *Markdown*
+  * *ghostwriter:* Cross-platform, aesthetic, distraction-free Markdown editor
+  * *pandoc:* Conversion between markup formats
+  * *[Marp for VS Code](https://yhatt.github.io/marp/):* Creating presentation with visual code IDE and markdown
 * *mediawriter:* Fedora Media Writer for creat boot usb sticks
 * *geteltorito:* El Torito boot image extractor
 
