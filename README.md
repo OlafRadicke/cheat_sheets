@@ -7,6 +7,7 @@ Cheat sheets
 * [Linux](linux/)
 * [OpenStack](openstack.md)
 * [CI/CD and Release management](cicd/README.md)
+* [ssh](tools/ssh.md)
 * [Terraform](terraform/)
 * [Tools](tools/)
 
