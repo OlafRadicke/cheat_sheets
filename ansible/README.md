@@ -4,6 +4,22 @@ About Ansible
 * [Vault](vault.md)
 
 
+Multiline debug output
+----------------------
+
+```yaml
+- name: "run hugo"
+  shell: "hugo --environment production "
+  args:
+    chdir: ../
+  delegate_to: localhost
+  register: hugo_result
+
+- debug:
+    msg: "{{ hugo_result.stdout.split('\n')[:-1] }}"
+```
+
+
 Ansible linter
 --------------
 
