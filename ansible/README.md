@@ -48,7 +48,7 @@ Inventory:
 
 ```bash
 [local_task]
-localhost  ansible_connection=local ansible_become=false
+localhost  ansible_connection=local
 ```
 
 Task file:
