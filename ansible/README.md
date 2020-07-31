@@ -41,6 +41,35 @@ Add a command like this:
 
 The errors of 301 and 303 ist ignore now.
 
+run an Ansible playbook locally
+-------------------------------
+
+Inventory:
+
+```bash
+[local_task]
+mydesk connection=local ansible_host=127.0.0.1
+```
+
+Task file:
+
+```yaml
+- name: Helm chart install # noqa 301 noqa 305
+  delegate_to: localhost
+  become: false
+  shell: date
+  register: return_value
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ return_value.stdout.split('\n') }}"
+  when: not ansible_check_mode
+
+- debug:
+    msg: "{{ return_value.stderr.split('\n') }}"
+  when: not ansible_check_mode
+```
+
 
 WebHooks and REST-APIs
 ----------------------
