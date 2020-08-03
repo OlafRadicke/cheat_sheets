@@ -10,6 +10,8 @@ Cheat sheets
 * [ssh](tools/ssh.md)
 * [Terraform](terraform/)
 * [Tools](tools/)
+  * [OpenSSL](tools/openssl.md)
+  * [Journal CTL](journalctl.md)
 
 Helpful tools for makedown
 --------------------------
