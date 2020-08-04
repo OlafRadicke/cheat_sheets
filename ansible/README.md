@@ -70,6 +70,12 @@ Task file:
   when: not ansible_check_mode
 ```
 
+Debugging inventory
+-------------------
+
+```bash
+ansible -i ./hosts all -m debug -a "var=hostvars[inventory_hostname]"
+```
 
 WebHooks and REST-APIs
 ----------------------
