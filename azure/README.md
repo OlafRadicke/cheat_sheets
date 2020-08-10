@@ -50,12 +50,20 @@ You have logged in. Now let us find all the subscriptions to which you have acce
   }
 ]
 ```
+...The here "id" is the "Subscription ID".
 
 ### List all azure accounts ###
 
 ```bash
 az account list
 ```
+
+### Get an existing service principal
+
+``bash
+az ad sp list --show-mine --query "[].{id:appId, tenant:appOwnerTenantId}"
+```
+
 
 Working with azure
 ------------------
