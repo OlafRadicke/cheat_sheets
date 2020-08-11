@@ -1,6 +1,7 @@
 List of helpful tools
 =====================
 
+* [sign git commits](git_sign.md)
 * [journalctl](journalctl.md): System logs
 * *neofetch:* CLI system information tool written in Bash
 * *htop:* Interactive process viewer
@@ -17,7 +18,7 @@ VirtualBox
 
 Übersichtstabelle Zugriffsmöglichkeiten
 
-| Netzwerktyp | Gast -> andere Gäste | Host -> Gast | Gast -> externes Netzwerk | 
+| Netzwerktyp | Gast -> andere Gäste | Host -> Gast | Gast -> externes Netzwerk |
 |-------------|----------------------|--------------|---------------------------|
 | Not attached | N | N | N |
 | Network Address Translation (NAT) | N | N | Y |
