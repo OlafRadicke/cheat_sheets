@@ -15,6 +15,22 @@ Check Certificate
 openssl x509 -noout -text -in jane_doe.crt
 ```
 
+Verify Certificate Chain
+------------------------
+
+After openssl create certificate chain, to verify certificate chain use below command:
+
+```bash
+openssl verify -CAfile certs/cacert.pem intermediate/certs/ca-chain-bundle.cert.pem
+
+intermediate/certs/ca-chain-bundle.cert.pem: OK
+```
+
+To verify certificate chain for online:
+
+```bash
+openssl s_client -quiet -connect google.com:443
+```
 
 Links
 -----
