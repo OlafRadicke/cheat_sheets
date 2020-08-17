@@ -37,7 +37,7 @@ ansible-playbook  --ask-vault-pass -i hosts ./setup.yml
 Or with password in a file
 
 ```bash
- ansible-playbook  --vault-password-file miy-password-file.txt -i hosts ./setup.yml
+ ansible-playbook  --vault-password-file my-password-file.txt -i hosts ./setup.yml
 ```
 
 External documentation
