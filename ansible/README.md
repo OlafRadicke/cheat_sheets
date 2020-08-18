@@ -41,6 +41,41 @@ Add a command like this:
 
 The errors of 301 and 303 ist ignore now.
 
+run an Ansible playbook locally
+-------------------------------
+
+Inventory:
+
+```bash
+[local_task]
+localhost  ansible_connection=local
+```
+
+Task file:
+
+```yaml
+- name: Helm chart install # noqa 301 noqa 305
+  delegate_to: localhost
+  become: false
+  shell: date
+  register: return_value
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ return_value.stdout.split('\n') }}"
+  when: not ansible_check_mode
+
+- debug:
+    msg: "{{ return_value.stderr.split('\n') }}"
+  when: not ansible_check_mode
+```
+
+Debugging inventory
+-------------------
+
+```bash
+ansible -i ./hosts all -m debug -a "var=hostvars[inventory_hostname]"
+```
 
 WebHooks and REST-APIs
 ----------------------
@@ -69,4 +104,43 @@ WebHooks and REST-APIs
     "https://www.fondsfinanz.de/confluence/rest/api/content/87894421/child/attachment/"
   register: curl_result
   ignore_errors: no
+```
+
+Uses a specific YAML file as an inventory source
+------------------------------------------------
+
+Example:
+
+```yaml
+all: # keys must be unique, i.e. only one 'hosts' per group
+    hosts:
+        test1:
+        test2:
+            host_var: value
+    vars:
+        group_all_var: value
+    children:   # key order does not matter, indentation does
+        other_group:
+            children:
+                group_x:
+                    hosts:
+                        test5   # Note that one machine will work without a colon
+                #group_x:
+                #    hosts:
+                #        test5  # But this won't
+                #        test7  #
+                group_y:
+                    hosts:
+                        test6:  # So always use a colon
+            vars:
+                g2_var2: value3
+            hosts:
+                test4:
+                    ansible_host: 127.0.0.1
+        last_group:
+            hosts:
+                test1 # same host as above, additional group membership
+            vars:
+                group_last_var: value
+
 ```
