@@ -129,6 +129,18 @@ MaxDataDiskCount    MemoryInMb    Name                    NumberOfCores    OsDis
 32                  65536         Standard_B16ms          16               1047552           131072
 ```
 
+List supported regions
+----------------------
+
+...for the current subscription and only in germany:
+
+```bash
+$ az account list-locations  --output table  | grep german
+Germany West Central      germanywestcentral   (Europe) Germany West Central
+Germany North             germanynorth         (Europe) Germany North
+```
+
+
 Price examples
 --------------
 

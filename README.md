@@ -2,6 +2,7 @@ Cheat sheets
 ============
 
 * [Ansible](ansible/)
+* [AWS](aws/README.md)
 * [Azure cloud](azure/)
 * [Kubernetes and container](k8s_and_container/README.md)
 * [Linux](linux/)
