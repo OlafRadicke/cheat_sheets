@@ -141,6 +141,14 @@ Price examples
 | Standard_D4_v3 | 4    | 16  | 100  | 0,102 |
 | Standard_H8    | 8    | 56  | 1000 | 0,492 |
 
+
+Get image list
+--------------
+
+```bash
+az vm image list
+```
+
 ### Azure pricing calculator ###
 
 See: [this site](https://azure.microsoft.com/de-de/pricing/calculator/)
