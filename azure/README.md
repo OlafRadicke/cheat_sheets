@@ -92,10 +92,11 @@ Press CTRL+C to close the tunnel...
 az network public-ip list
 ```
 
-### Get limits of a location ###
+### Get vm limits of a location ###
 
 ```bash
-[or@augsburg02 bootstrap_azure_aks]$ az vm list-usage --location westeurope  --output table
+az vm list-usage --location westeurope  --output table
+
 Name                               CurrentValue    Limit
 ---------------------------------  --------------  -------
 Availability Sets                  0               2500
@@ -107,7 +108,21 @@ Total Regional Low-priority vCPUs  0               10
 Standard Dv2 Family vCPUs          0               10
 Basic A Family vCPUs               0               10
 Standard A0-A7 Family vCPUs        0               10
+[...]
+```
+### Get network limits
 
+```bash
+az network list-usages --location "Germany West Central" --output table
+
+Name                                                          CurrentValue    Limit
+------------------------------------------------------------  --------------  ----------
+Virtual Networks                                              1               1000
+Static Public IP Addresses                                    0               10
+Network Security Groups                                       1               5000
+Public IP Addresses                                           8               10
+Public Ip Prefixes                                            0               2147483647
+Nat Gateways                                                  0               2147483647
 [...]
 ```
 
