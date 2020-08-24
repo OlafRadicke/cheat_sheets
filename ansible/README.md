@@ -70,6 +70,14 @@ Task file:
   when: not ansible_check_mode
 ```
 
+Disable finger print check
+--------------------------
+
+```bash
+export ANSIBLE_HOST_KEY_CHECKING=False && \
+ansible-playbook ./site.yml
+```
+
 Debugging inventory
 -------------------
 
