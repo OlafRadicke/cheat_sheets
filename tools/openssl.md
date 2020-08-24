@@ -15,6 +15,13 @@ Check Certificate
 openssl x509 -noout -text -in jane_doe.crt
 ```
 
+check cert bundle
+-----------------
+
+```bash
+openssl crl2pkcs7 -nocrl -certfile dummy.bundle.pem | openssl pkcs7 -print_certs -text -noout
+```
+
 Verify Certificate Chain
 ------------------------
 
