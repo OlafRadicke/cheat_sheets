@@ -173,7 +173,18 @@ Get image list
 --------------
 
 ```bash
-az vm image list
+[radickeo@localhost play_pki_ca_with_ansible]$ az vm image list --location westeurope  --output table
+You are viewing an offline list of images, use --all to retrieve an up-to-date list
+Offer          Publisher               Sku                 UrnAlias
+-------------  ----------------------  ------------------  -------------------
+CentOS         OpenLogic               7.5                 CentOS
+CoreOS         CoreOS                  Stable              CoreOS
+debian-10      Debian                  10                  Debian
+openSUSE-Leap  SUSE                    42.3                openSUSE-Leap
+RHEL           RedHat                  7-LVM               RHEL
+SLES           SUSE                    15                  SLES
+UbuntuServer   Canonical               18.04-LTS           UbuntuLTS
+
 ```
 
 ### Azure pricing calculator ###
