@@ -60,7 +60,7 @@ az account list
 
 ### Get an existing service principal
 
-``bash
+```bash
 az ad sp list --show-mine --query "[].{id:appId, tenant:appOwnerTenantId}"
 ```
 
