@@ -29,7 +29,7 @@ spec:
 Enter:
 
 ```bash
-uubectl apply -f ./deployment.yaml
+kubectl apply -f ./deployment.yaml
 ```
 
 Service manifest file (service.yaml):
@@ -54,4 +54,4 @@ spec:
 Enter:
 
 ```bash
-uubectl apply -f ./service.yaml
+kubectl apply -f ./service.yaml
