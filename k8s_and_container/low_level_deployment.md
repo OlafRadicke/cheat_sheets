@@ -3,7 +3,7 @@
 Example for a deployment manifast (deployment.yaml) for a pod "demo":
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: demo
@@ -35,7 +35,7 @@ kubectl apply -f ./deployment.yaml
 Service manifest file (service.yaml):
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Service
 metadata:
     name: demo
