@@ -39,6 +39,15 @@ spec:
   - name: regcred
 ```
 
+Apply registry secret to serviceaccount "default"
+-------------------------------------------------
+
+```bash
+kubectl patch \
+        serviceaccount \
+        default \
+        -p '{"imagePullSecrets": [{"name": "regcred"}]}'
+```
 
 Delete a secret
 ---------------
