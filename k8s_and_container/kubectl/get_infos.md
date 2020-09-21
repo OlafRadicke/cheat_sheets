@@ -46,7 +46,8 @@ kubectl cluster-info dump
 Get infos about pvc
 -------------------
 
-[or@augsburg02 migrationsabschnitt-2020-000]$ kubectl describe pv 
+```bash
+[or@augsburg02 migrationsabschnitt-2020-000]$ kubectl describe pv
 Name:              pvc-d2ed7e21-5b89-4e1b-a1a3-5992115eb6b6
 Labels:            failure-domain.beta.kubernetes.io/region=westeurope
 Annotations:       pv.kubernetes.io/bound-by-controller: yes
@@ -60,3 +61,4 @@ Reclaim Policy:    Delete
 Access Modes:      RWO
 VolumeMode:        Filesystem
 Capacity:          2Gi
+```
