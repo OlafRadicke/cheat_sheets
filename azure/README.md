@@ -58,12 +58,92 @@ You have logged in. Now let us find all the subscriptions to which you have acce
 az account list
 ```
 
-### Get an existing service principal
+
+
+### Service principals ###
+
+Get an existing service principal:
 
 ```bash
-az ad sp list --show-mine --query "[].{id:appId, tenant:appOwnerTenantId}"
+az ad sp list --output table --all
 ```
 
+Get
+
+```bash
+az ad app list --output table
+```
+
+Create an Application:
+
+```bash
+az ad app create --display-name OlafTestApp --native-app
+{
+  "acceptMappedClaims": null,
+  "addIns": [],
+  "allowGuestsSignIn": null,
+  "allowPassthroughUsers": null,
+  "appId": "1ed1fa06-b97d-490c-9bc7-b1c8ec7cf471",
+  "appLogoUrl": null,
+  "appPermissions": null,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  [...]
+```
+
+
+Create service principal with password:
+
+```bash
+Changing "SPofOlaf" to a valid URI of "http://SPofOlaf", which is the required format used for service principal names
+Creating a role assignment under the scope of "/subscriptions/7de97db4-XXXX-XXXX-XXXX-be87409f4f7e"
+  Retrying role assignment creation: 1/36
+{
+  "appId": "3d73be36-XXXX-XXXX-XXXX-ee32dfed9606",
+  "displayName": "SPofOlaf",
+  "name": "http://SPofOlaf",
+  "password": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "tenant": "4ba9c756-XXXX-XXXX-XXXX-b205e570f62b"
+}
+```
+
+Sign in using a service principal
+
+```bash
+export AZURE_CLIENT_ID="3d73be36-XXXX-XXXX-XXXX-ee32dfed9606"
+export AZURE_SECRET="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+export AZURE_SUBSCRIPTION_ID="7de97db4-XXXX-XXXX-XXXX-be87409f4f7e"
+export AZURE_TENANT="4ba9c756-XXXX-XXXX-XXXX-b205e570f62b"
+
+az login --service-principal \
+  --username $AZURE_CLIENT_ID \
+  --password $AZURE_SECRET \
+  --tenant $AZURE_TENANT
+```
+
+The Ansible modules will look for credentials in ```$HOME/.azure/credentials```. It will look as follows:
+
+```ini
+[default]
+subscription_id="7de97db4-XXXX-XXXX-XXXX-be87409f4f7e"
+client_id="3d73be36-XXXX-XXXX-XXXX-ee32dfed9606"
+secret="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+tenant="4ba9c756-XXXX-XXXX-XXXX-b205e570f62b"
+```
+
+Add service principal reading access for an App:
+
+```bash
+az role assignment create --assignee 1ed1fa06-b97d-490c-9bc7-b1c8ec7cf471 --role Reader
+```
+
+Delete a  service principal:
+
+```bash
+[radickeo@localhost cheat_sheets]$ az ad sp delete --id $AZURE_CLIENT_ID
+
+Removing role assignments
+```
 
 Working with azure
 ------------------
@@ -71,7 +151,8 @@ Working with azure
 ### Ge the configuration of a Kubernets clouster ###
 
 ```bash
-[or@augsburg03 ansible]$ az aks get-credentials --resource-group "name_of_your_resource_group" --name "name_of_your_kubernetes_cluster"
+$ az aks get-credentials --resource-group "name_of_your_resource_group" --name "name_of_your_kubernetes_cluster"
+
 Merged "name_of_your_kubernetes_cluster" as current context in /home/or/.kube/config
 
 ```
@@ -79,7 +160,8 @@ Merged "name_of_your_kubernetes_cluster" as current context in /home/or/.kube/co
 ### Open the Kubernetes deshbord ###
 
 ```bash
-[or@augsburg03 local]$ az aks browse --resource-group name_of_your_resource_group --name name_of_your_resource_group
+$ az aks browse --resource-group name_of_your_resource_group --name name_of_your_resource_group
+
 Merged "name_of_your_resource_group" as current context in /tmp/tmppvlruefk
 Proxy running on http://127.0.0.1:8001/
 Press CTRL+C to close the tunnel...
@@ -130,7 +212,8 @@ Get list of vm sizes
 --------------------
 
 ```bash
-[or@augsburg02 bootstrap_azure_aks]$ az vm list-sizes --location "westeurope" --output table
+$ az vm list-sizes --location "westeurope" --output table
+
 MaxDataDiskCount    MemoryInMb    Name                    NumberOfCores    OsDiskSizeInMb    ResourceDiskSizeInMb
 ------------------  ------------  ----------------------  ---------------  ----------------  ----------------------
 2                   512           Standard_B1ls           1                1047552           4096
@@ -151,6 +234,7 @@ List supported regions
 
 ```bash
 $ az account list-locations  --output table  | grep german
+
 Germany West Central      germanywestcentral   (Europe) Germany West Central
 Germany North             germanynorth         (Europe) Germany North
 ```
@@ -173,7 +257,8 @@ Get image list
 --------------
 
 ```bash
-[radickeo@localhost play_pki_ca_with_ansible]$ az vm image list --location westeurope  --output table
+$ az vm image list --location westeurope  --output table
+
 You are viewing an offline list of images, use --all to retrieve an up-to-date list
 Offer          Publisher               Sku                 UrnAlias
 -------------  ----------------------  ------------------  -------------------
