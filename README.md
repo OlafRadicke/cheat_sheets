@@ -12,7 +12,8 @@ Cheat sheets
 * [Terraform](terraform/)
 * [Tools](tools/)
   * [OpenSSL](tools/openssl.md)
-  * [Journal CTL](journalctl.md)
+  * [Journal CTL](tool/journalctl.md)
+  * [YubiHSM2](tools/yubihsm2.md)
 
 Helpful tools for makedown
 --------------------------
