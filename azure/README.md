@@ -91,10 +91,11 @@ az ad app create --display-name OlafTestApp --native-app
   [...]
 ```
 
-
 Create service principal with password:
 
 ```bash
+$ az ad sp create-for-rbac --name SPofOlaf
+
 Changing "SPofOlaf" to a valid URI of "http://SPofOlaf", which is the required format used for service principal names
 Creating a role assignment under the scope of "/subscriptions/7de97db4-XXXX-XXXX-XXXX-be87409f4f7e"
   Retrying role assignment creation: 1/36
