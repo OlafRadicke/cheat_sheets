@@ -58,8 +58,6 @@ You have logged in. Now let us find all the subscriptions to which you have acce
 az account list
 ```
 
-
-
 ### Service principals ###
 
 Get an existing service principal:
@@ -270,6 +268,20 @@ openSUSE-Leap  SUSE                    42.3                openSUSE-Leap
 RHEL           RedHat                  7-LVM               RHEL
 SLES           SUSE                    15                  SLES
 UbuntuServer   Canonical               18.04-LTS           UbuntuLTS
+
+```
+
+Get list of disks
+-----------------
+
+```bash
+$ az disk list --out table
+Name                                                      ResourceGroup        Location            Zones    Sku           OsType    SizeGb    ProvisioningState
+--------------------------------------------------------  -------------------  ------------------  -------  ------------  --------  --------  -------------------
+demo-pki-01-demo-pki-ac-01-persist                        DEMO-PKI-01-PERSIST  germanywestcentral           Standard_LRS  Linux     1         Succeeded
+demo-pki-01-demo-pki-ac-02-persist                        DEMO-PKI-01-PERSIST  germanywestcentral           Standard_LRS  Linux     1         Succeeded
+demo-pki-ac-01_OsDisk_1_438b6240bc5c44509f2dcbb23e57215b  DEMO-PKI-01          germanywestcentral           Premium_LRS   Linux     30        Succeeded
+demo-pki-ac-02_OsDisk_1_cab5f29d74a54c4a85a3c0b1d3237a83  DEMO-PKI-01          germanywestcentral           Premium_LRS   Linux     30        Succeeded
 
 ```
 
