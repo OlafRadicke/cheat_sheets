@@ -47,7 +47,7 @@ And checkout status under [http://127.0.0.1:12345/connector/status](http://127.0
 Oben the yubihsm-shell (without privileged escalation)
 
 ```bash
-[or@augsburg02 cheat_sheets]$ yubihsm-shell
+[or@aug]$ yubihsm-shell
 Using default connector URL: http://127.0.0.1:12345
 ```
 
@@ -135,12 +135,12 @@ yubihsm-shell -a list-objects -d 0 -t any -A any  -p password
 ```
 
 ```bash
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a list-objects \
-                                            -d 0 \
-                                            -t any \
-                                            -A any \
-                                            -p password2 \
-                                            --authkey="0x9d17"
+[or@aug]$ yubihsm-shell -a list-objects \
+                        -d 0 \
+                        -t any \
+                        -A any \
+                        -p password2 \
+                        --authkey="0x9d17"
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
@@ -154,12 +154,12 @@ id: 0x9d17, type: authentication-key, sequence: 0
 #### Get object infos
 
 ```bash
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a get-object-info \
-                                            -i 0x9893 \
-                                            -t authentication-key \
-                                            -A any \
-                                            -p password4 \
-                                            --authkey=0x9893
+[or@aug]$ yubihsm-shell -a get-object-info \
+                        -i 0x9893 \
+                        -t authentication-key \
+                        -A any \
+                        -p password4 \
+                        --authkey=0x9893
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
@@ -179,13 +179,14 @@ capabilities: change-authentication-key:create-otp-aead:[...]]:
 #### Create an Authentication Key for Auditing
 
 ```bash
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a put-authentication-key \
-                                            -i 0x0002 \
-                                            -l "Audit auth key" \
-                                            -c "all" \
-                                            -t "all" \
-                                            -p "password" \
-                                            --new-password="password2"
+[or@aug]$ yubihsm-shell -a put-authentication-key \
+                        -i 0x0002 \
+                        -l "Audit auth key" \
+                        -c "all" \
+                        -t "all" \
+                        --authkey=0x0003 \
+                        -p "password3" \
+                        --new-password="password2"
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
@@ -193,14 +194,29 @@ Created session 0
 Stored Authentication key 0x9d17
 ```
 
+#### Create asymmetric key (for CA)
+
+```bash
+[or@aug]$ yubihsm-shell -a put-asymmetric-key \
+                        -i 0x0006 \
+                        -d 0 \
+                        -l "CA key" \
+                        -c "all" \
+                        -A "sign-pkcs" \
+                        -t "256" \
+                        --authkey=0x0003 \
+                        -p "password3"
+```
+
+
 #### Delete object
 
 ```bash
-yubihsm-shell -a delete-object \
-              -d 1 \
-              -i "0x9d17" \
-              -t "authentication-key" \
-              -p "password" 
+[or@aug]$ yubihsm-shell -a delete-object \
+                        -d 1 \
+                        -i "0x9d17" \
+                        -t "authentication-key" \
+                        -p "password" 
 ```
 
 yubihsm> delete 1 0x0063 asymmetric-key
@@ -214,11 +230,11 @@ Remove factory key
 ------------------
 
 ```bash
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a list-objects \
-                                            -d 0 \
-                                            -t any \
-                                            -A any 
-                                            -p password
+[or@aug]$ yubihsm-shell -a list-objects \
+                        -d 0 \
+                        -t any \
+                        -A any \
+                        -p password
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
@@ -227,14 +243,14 @@ Found 2 object(s)
 id: 0x0001, type: authentication-key, sequence: 0
 id: 0x0063, type: asymmetric-key, sequence: 1
 
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a put-authentication-key \
-                                            -i 0x0002 \
-                                            -l "Audit auth key" \
-                                            -c "all" \
-                                            -t "all" \
-                                            --delegated="all" \
-                                            --new-password="password2" \
-                                            -p "password"
+[or@aug]$ yubihsm-shell -a put-authentication-key \
+                        -i 0x0002 \
+                        -l "Audit auth key" \
+                        -c "all" \
+                        -t "all" \
+                        --delegated="all" \
+                        --new-password="password2" \
+                        -p "password"
 
 
 Using default connector URL: http://127.0.0.1:12345
@@ -242,11 +258,11 @@ Session keepalive set up to run every 15 seconds
 Created session 0
 Stored Authentication key 0x0002
 
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a list-objects \
-                                            -d 0 \
-                                            -t any \
-                                            -A any \
-                                            -p password
+[or@aug]$ yubihsm-shell -a list-objects \
+                        -d 0 \
+                        -t any \
+                        -A any \
+                        -p password
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
@@ -256,38 +272,38 @@ id: 0x0001, type: authentication-key, sequence: 0
 id: 0x0002, type: authentication-key, sequence: 0
 
 
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a delete-object \
-                                            -i "0x0001" \
-                                            -t "authentication-key" \
-                                            --authkey="0x0002"  \
-                                            -p "password2" 
+[or@aug]$ yubihsm-shell -a delete-object \
+                        -i "0x0001" \
+                        -t "authentication-key" \
+                        --authkey="0x0002"  \
+                        -p "password2" 
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
 Created session 0
 
 
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a put-authentication-key 
-                                            -i "0x0003" \
-                                            -c 'all' \
-                                            -t "all" \
-                                            --delegated="all" \
-                                            -l "Audit auth key 3" \
-                                            --new-password="password3" \
-                                            --authkey="0x0002"  \
-                                            -p "password2"
+[or@aug]$ yubihsm-shell -a put-authentication-key 
+                        -i "0x0003" \
+                        -c 'all' \
+                        -t "all" \
+                        --delegated="all" \
+                        -l "Audit auth key 3" \
+                        --new-password="password3" \
+                        --authkey="0x0002"  \
+                        -p "password2"
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
 Created session 1
 Stored Authentication key 0x0003
 
-[or@augsburg02 cheat_sheets]$ yubihsm-shell -a get-object-info \
-                                            -i 0x0002 \
-                                            -t authentication-key \
-                                            -A any  \
-                                            -p password4 \
-                                            --authkey=0x9893
+[or@aug]$ yubihsm-shell -a get-object-info \
+                        -i 0x0002 \
+                        -t authentication-key \
+                        -A any  \
+                        -p password4 \
+                        --authkey=0x9893
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
@@ -300,8 +316,9 @@ id: 0x0003, type: authentication-key, algorithm: aes128-yubico-authentication, l
 Documentatin und links
 ----------------------
 
-* [yubihsm-shell](https://developers.yubico.com/yubihsm-shell/yubihsm-shell.html)
-* [Usage Guides](https://developers.yubico.com/YubiHSM2/Usage_Guides/)
-* [YubiHSM quick start tutorial](https://developers.yubico.com/YubiHSM2/Usage_Guides/YubiHSM_quick_start_tutorial.html)
-* [OpenSSL with YubiHSM I.](https://developers.yubico.com/YubiHSM2/Usage_Guides/OpenSSH_certificates.html)
-* [OpenSSL with YubiHSM II.](https://developers.yubico.com/YubiHSM2/Usage_Guides/OpenSSL_with_libp11.html)
+
+* **[Cheat sheets of YubiHSM2 with OpenSSL](tools/yubihsm2_with_openssl.md)**
+* Externel docs:
+  * [yubihsm-shell](https://developers.yubico.com/yubihsm-shell/yubihsm-shell.html)
+  * [Usage Guides](https://developers.yubico.com/YubiHSM2/Usage_Guides/)
+  * [YubiHSM quick start tutorial](https://developers.yubico.com/YubiHSM2/Usage_Guides/YubiHSM_quick_start_tutorial.html)

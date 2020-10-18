@@ -10,10 +10,10 @@ Cheat sheets
 * [CI/CD and Release management](cicd/README.md)
 * [ssh](tools/ssh.md)
 * [Terraform](terraform/)
-* [Tools](tools/)
+* [YubiHSM2](yubihsm2/yubihsm2.md)
+* [(Small) Tools](tools/)
   * [OpenSSL](tools/openssl.md)
   * [Journal CTL](tool/journalctl.md)
-  * [YubiHSM2](tools/yubihsm2.md)
 
 Helpful tools for makedown
 --------------------------
