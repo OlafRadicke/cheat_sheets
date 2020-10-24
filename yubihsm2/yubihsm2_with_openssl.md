@@ -23,6 +23,7 @@ Requirements:
 * Fedora
   * 'opensc' to provide command 'pkcs11-tool'
   * openssl-pkcs11
+  * yubihsm-shell
 
 Result of find commnd:
 
