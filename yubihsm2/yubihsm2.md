@@ -224,7 +224,6 @@ yubihsm> delete 1 0x0063 asymmetric-key
 
 #### Change authentication-key
 
-change-authentication-key
 
 Remove factory key
 ------------------

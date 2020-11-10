@@ -152,3 +152,38 @@ all: # keys must be unique, i.e. only one 'hosts' per group
                 group_last_var: value
 
 ```
+
+Loop over an block
+------------------
+
+
+```yaml
+# playbook.yml
+---
+- hosts: localhost
+  connection: local
+  vars:
+    ip_addresses:
+      - 10.0.0.10
+      - 10.0.0.11
+  tasks:
+    - name: deploy files with network address in them
+      include_tasks: network_files.yml
+      loop: "{{ ip_addresses }}"
+```
+
+```yaml
+# network_files.yml
+---
+- name: Copy using inline content to first file
+  copy:
+    content: |
+      ip_address={{ item }}
+    dest: /etc/some_config_file.conf
+ 
+- name: Copy using inline content to second file
+  copy:
+    content: |
+      ip_address={{ item }}
+    dest: /etc/some_other_config_file.conf
+```
