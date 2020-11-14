@@ -1,9 +1,32 @@
 YubiHSM2 with OpenSSL
 =====================
 
+Requirements
+------------
+
+engine_pkcs11 and yubihsm_pkcs11
+
+* Fedora
+  * 'opensc' to provide command 'pkcs11-tool'
+  * openssl-pkcs11
+  * yubihsm-shell
+
+Lib pathes:
+
+
+```
+/usr/lib64/opensc-pkcs11.so
+/usr/lib64/pkcs11/opensc-pkcs11.so
+/usr/lib64/pkcs11/yubihsm_pkcs11.so
+/usr/lib64/engines-1.1/libpkcs11.so
+/usr/lib64/engines-1.1/pkcs11.so
+```
+
 
 Generate and verify digital signatures
 --------------------------------------
+
+### OpenSSL ###
 
 ```bash
 openssl dgst -engine pkcs11 \
@@ -13,27 +36,8 @@ openssl dgst -engine pkcs11 \
              -sha384 t3200.dat
 ```
 
+### pkcs11-tool ###
 
-
-engine_pkcs11 and yubihsm_pkcs11
---------------------------------
-
-Requirements:
-
-* Fedora
-  * 'opensc' to provide command 'pkcs11-tool'
-  * openssl-pkcs11
-  * yubihsm-shell
-
-Result of find commnd:
-
-```
-/usr/lib64/opensc-pkcs11.so
-/usr/lib64/pkcs11/opensc-pkcs11.so
-/usr/lib64/pkcs11/yubihsm_pkcs11.so
-/usr/lib64/engines-1.1/libpkcs11.so
-/usr/lib64/engines-1.1/pkcs11.so
-```
 
 Example:
 
@@ -47,7 +51,30 @@ pkcs11-tool --module /usr/lib64/pkcs11/yubihsm_pkcs11.so \
             --usage-sign
 ```
 
-Example files: See [/examples](/examples)
+Troubleshooting
+---------------
+
+Check HSM Service
+
+```
+# systemctl status yhconsrv
+```
+
+Find Logs:
+
+```
+[or@olafthink cheat_sheets]$ sudo journalctl -t  yubihsm-connector -f
+
+-- Logs begin at Thu 2020-05-21 19:59:57 CEST. --
+Nov 14 09:07:33 olafthink.localdomain yubihsm-connector[1719]: 2020/11/14 09:07:33 handle_events: error: libusb: interrupted [code -10]
+
+```
+
+
+Example files
+-------------
+
+See: [/examples](/examples)
 
 
 Documentatin und links
