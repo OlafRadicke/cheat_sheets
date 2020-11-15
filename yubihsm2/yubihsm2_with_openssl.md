@@ -29,12 +29,61 @@ Generate and verify digital signatures
 ### OpenSSL ###
 
 ```bash
-openssl dgst -engine pkcs11 \
-             -keyform engine \
-             -sign "pkcs11:token=YubiHSM;id=%04%01;type=private" \
-             -out t3200.pkcs1.sig \
-             -sha384 t3200.dat
+export YUBIHSM_PKCS11_CONF=./yubihsm_pkcs11.conf
+TEST_AUTH_KEY=0x0001
+TEST_AUTH_PW=password
+TEST_SIGN_KEY=0x0004
+
+
+yubihsm-shell                                                                 \
+--action=list-objects                                                         \
+ --domains=0                                                                  \
+ --object-type=any                                                            \
+ --algorithm=any                                                              \
+ --authkey="${TEST_AUTH_KEY}"                                                 \
+--password="${TEST_AUTH_PW}"                                                  \
+
+yubihsm-shell                                                                 \
+  --action=generate-asymmetric-key                                            \
+  --object-id=${TEST_SIGN_KEY}                                                \
+  --label="root_ca_sign_key"                                                  \
+  --algorithm="rsa3072"                                                       \
+  --capabilities=sign-pkcs,sign-pss,sign-ecdsa,sign-eddsa,sign-ssh-certificate \
+  --authkey=${TEST_AUTH_KEY}                                                  \
+  --password="${TEST_AUTH_PW}"
+
+openssl req                                                                   \
+  -new                                                                        \
+  -sha256                                                                     \
+  -nodes                                                                      \
+  -config ./openssl.cnf                                                       \
+  -extensions v3_ca                                                           \
+  -engine pkcs11                                                              \
+  -key 0:${TEST_SIGN_KEY}                                                     \
+  -keyform engine                                                             \
+  -out ./hsm-root-ca-01.dum.my.csr.pem                                        \
+
+openssl req                                                                   \
+  -new                                                                        \
+  -x509                                                                       \
+  -days 9125                                                                  \
+  -nodes                                                                      \
+  -config ./openssl.cnf                                                       \
+  -extensions v3_ca                                                           \
+  -engine pkcs11                                                              \
+  -key "0:${TEST_SIGN_KEY}"                                                   \
+  -keyform engine                                                             \
+  -out ./hsm-root-ca-01.dum.my.crt.pem                                        \
+
+yubihsm-shell                                                                 \
+ --action=list-objects                                                        \
+ --domains=0                                                                  \
+ --object-type=any                                                            \
+ --algorithm=any                                                              \
+ --authkey="${TEST_AUTH_KEY}"                                                 \
+ --password="${TEST_AUTH_PW}"
 ```
+
 
 ### pkcs11-tool ###
 
@@ -50,6 +99,18 @@ pkcs11-tool --module /usr/lib64/pkcs11/yubihsm_pkcs11.so \
             --label "my_key" \
             --usage-sign
 ```
+
+```bash
+pkcs11-tool                                                                   \
+  --module /usr/lib64/pkcs11/yubihsm_pkcs11.so                                \
+  --keypairgen                                                                \
+  --usage-sign                                                                \
+  --label "root-ca-private-key"                                               \
+  --key-type rsa:2048                                                         \
+  --login                                                                     \
+  --pin 0001password
+```
+
 
 Capability
 ----------
