@@ -189,8 +189,8 @@ Loop over an block
 ```
 
 
-Catch errors after debug
-------------------------
+Catch errors and return debug info
+----------------------------------
 
 ```yaml
 - name:           Get date
@@ -198,9 +198,10 @@ Catch errors after debug
   ignore_errors:  yes
   register:       shell_result
 
-- name:           DEBUG Output return value
-  debug:
-    msg:          "{{ shell_result }}"
-  failed_when:    shell_result.rc != 0
-
+- block:
+  - name:          DEBUG Output return value
+    fail:
+      msg:         "{{ shell_result }}"
+    when:          shell_result.rc != 0
+  when:            shell_result.rc is defined
 ```
