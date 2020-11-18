@@ -30,10 +30,11 @@ Generate and verify digital signatures
 
 ```bash
 export YUBIHSM_PKCS11_CONF=./yubihsm_pkcs11.conf
-TEST_AUTH_KEY=0x0001
+TEST_AUTH_KEY=1
 TEST_AUTH_PW=password
-TEST_SIGN_KEY=0x0004
+TEST_SIGN_KEY=0004
 
+echo 'connector = http://127.0.0.1:12345' > ${YUBIHSM_PKCS11_CONF}
 
 yubihsm-shell                                                                 \
 --action=list-objects                                                         \
@@ -61,7 +62,8 @@ openssl req                                                                   \
   -engine pkcs11                                                              \
   -key 0:${TEST_SIGN_KEY}                                                     \
   -keyform engine                                                             \
-  -out ./hsm-root-ca-01.dum.my.csr.pem                                        \
+  -out ./hsm-root-ca-01.dum.my.csr.pem
+
 
 openssl req                                                                   \
   -new                                                                        \
@@ -71,9 +73,33 @@ openssl req                                                                   \
   -config ./openssl.cnf                                                       \
   -extensions v3_ca                                                           \
   -engine pkcs11                                                              \
-  -key "0:${TEST_SIGN_KEY}"                                                   \
+  -key "${TEST_AUTH_KEY}:${TEST_SIGN_KEY}"                                    \
   -keyform engine                                                             \
-  -out ./hsm-root-ca-01.dum.my.crt.pem                                        \
+  -out ./hsm-root-ca-01.dum.my.crt.pem
+
+openssl req                                                                   \
+  -new                                                                        \
+  -x509                                                                       \
+  -days 9125                                                                  \
+  -nodes                                                                      \
+  -config ./openssl.cnf                                                       \
+  -extensions v3_ca                                                           \
+  -engine pkcs11                                                              \
+  -key "000${TEST_AUTH_KEY}:${TEST_SIGN_KEY}"                                 \
+  -keyform engine                                                             \
+  -out ./hsm-root-ca-01.dum.my.crt.pem
+
+openssl req                                                                   \
+  -new                                                                        \
+  -x509                                                                       \
+  -days 9125                                                                  \
+  -nodes                                                                      \
+  -config ./openssl.cnf                                                       \
+  -extensions v3_ca                                                           \
+  -engine pkcs11                                                              \
+  -key "slot_0-id_${TEST_SIGN_KEY}"                                           \
+  -keyform engine                                                             \
+  -out ./hsm-root-ca-01.dum.my.crt.pem
 
 yubihsm-shell                                                                 \
  --action=list-objects                                                        \
@@ -82,6 +108,29 @@ yubihsm-shell                                                                 \
  --algorithm=any                                                              \
  --authkey="${TEST_AUTH_KEY}"                                                 \
  --password="${TEST_AUTH_PW}"
+```
+
+OpenSSL config:
+
+```
+HOME                        = .
+
+openssl_conf                = default_modules
+
+[default_modules]
+engines                     = engine_section
+
+[engine_section]
+pkcs11                      = pkcs11_section
+
+[pkcs11_section]
+engine_id                   = pkcs11
+MODULE_PATH                 = /usr/lib64/pkcs11/yubihsm_pkcs11.so
+INIT_ARGS                   = connector=http://127.0.0.1:12345 debug
+PIN                         = "0001password"
+init                        = 0
+
+[...]
 ```
 
 
@@ -155,6 +204,19 @@ Find Logs:
 
 -- Logs begin at Thu 2020-05-21 19:59:57 CEST. --
 Nov 14 09:07:33 olafthink.localdomain yubihsm-connector[1719]: 2020/11/14 09:07:33 handle_events: error: libusb: interrupted [code -10]
+
+```
+
+Debugging mode:
+
+```bash
+
+export YUBIHSM_PKCS11_DBG=true
+echo 'connector = http://127.0.0.1:12345' > ${YUBIHSM_PKCS11_CONF}
+echo 'debug' >>  ${YUBIHSM_PKCS11_CONF}
+echo 'dinout' >>  ${YUBIHSM_PKCS11_CONF}
+echo 'libdebug' >>  ${YUBIHSM_PKCS11_CONF}
+echo 'debug-file = ./debug_out' >>  ${YUBIHSM_PKCS11_CONF}
 
 ```
 
