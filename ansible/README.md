@@ -180,10 +180,28 @@ Loop over an block
     content: |
       ip_address={{ item }}
     dest: /etc/some_config_file.conf
- 
+
 - name: Copy using inline content to second file
   copy:
     content: |
       ip_address={{ item }}
     dest: /etc/some_other_config_file.conf
+```
+
+
+Catch errors and return debug info
+----------------------------------
+
+```yaml
+- name:           Get date
+  shell:          date
+  ignore_errors:  yes
+  register:       shell_result
+
+- block:
+  - name:          DEBUG Output return value
+    fail:
+      msg:         "{{ shell_result }}"
+    when:          shell_result.rc != 0
+  when:            shell_result.rc is defined
 ```
