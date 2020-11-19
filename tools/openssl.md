@@ -42,3 +42,4 @@ openssl s_client -quiet -connect google.com:443
 Links
 -----
 * [OpenSSL (de)](https://wiki.magenbrot.net/linux/kryptographie/ssl/openssl-zertifikate)
+* [Alternatives cfssl](https://github.com/cloudflare/cfssl)
