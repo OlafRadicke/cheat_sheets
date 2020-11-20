@@ -14,7 +14,7 @@ Cheat sheets
 * [(Small) Tools](tools/)
   * [OpenSSL](tools/openssl.md)
   * [Journal CTL](tool/journalctl.md)
-  * [LUKS](tools/luks.yml)
+  * [LUKS](tools/luks.md)
   * [YubiHSM2](tools/yubihsm2.md)
 
 Helpful tools for makedown
