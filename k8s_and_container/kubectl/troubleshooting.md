@@ -36,6 +36,14 @@ kubectl logs -f deploy/
 
 ```
 
+Attach on running pod
+---------------------
+
+```bash
+kubectl exec -it my-pod-k8s-5cd4c85695-8lxlc sh
+
+```
+
 Attach on crashed pods
 ----------------------
 
@@ -56,5 +64,5 @@ worker-5665cb8df5-zd4g6          1/1     Running            7          25m
 [or@augsburg03 low_level_k8s_buildbot_deployment]$ kubectl exec -it buildbot-demo sh
 /srv/buildbot $ ls
 buildbot.tac       http.log           master.cfg         master.cfg.sample  start_buildbot.sh  twistd.pid
-/srv/buildbot $ 
+/srv/buildbot $
 ```
