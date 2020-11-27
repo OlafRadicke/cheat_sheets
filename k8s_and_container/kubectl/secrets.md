@@ -16,6 +16,27 @@ kubectl create secret docker-registry \
         secret/regcred created
 ```
 
+base64 encoding
+---------------
+
+Without line breaks
+
+```
+cat /registry.crt | base64 -w0
+```
+
+```yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-tls
+type: Opaque
+data:
+  tls.crt: {{ crt_base64 }}
+  tls.key: {{ key_base64 }}
+```
+
 Get secrets
 -----------
 
