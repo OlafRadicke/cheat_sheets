@@ -2,6 +2,10 @@
 
 create_ca_keys () {
 
+  printf "####################################### \n"
+  printf "Kreate keys for ca: ${1} ${2} \n"
+  printf "####################################### \n"
+
   yubihsm-shell                                                               \
     --action=generate-asymmetric-key                                          \
     --object-id=${1}                                                          \

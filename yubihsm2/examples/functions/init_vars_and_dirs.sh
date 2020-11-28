@@ -15,6 +15,7 @@ init_vars_and_dirs () {
   export TEST_ROOT_CA_KEY=0004
   export TEST_ISSUE_CA_KEY=0005
   export DEMO_TMP_DIR=./tmp
+  export DEMO_CONFIG_DIR=./configs
 
   mkdir -p ${DEMO_TMP_DIR}
   echo 'connector = http://127.0.0.1:12345' > ${YUBIHSM_PKCS11_CONF}
