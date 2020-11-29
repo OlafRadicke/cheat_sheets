@@ -1,9 +1,10 @@
 
 
-create_intermediate_ca_csr () {
+openssl_create_intermediate_ca_csr () {
 
   printf "####################################### \n"
   printf "Kreate CSR for issue ca \n"
+  printf "/functions/openssl_create_intermediate_ca_csr.sh \n"
   printf "####################################### \n"
 
   openssl req                                                                 \

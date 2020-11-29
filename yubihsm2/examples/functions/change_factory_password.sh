@@ -4,6 +4,7 @@ change_factory_password () {
 
   printf "####################################### \n"
   printf "Change factory password of YubiHSM2: \n"
+  printf "/functions/change_factory_password.sh \n"
   printf "####################################### \n"
 
 

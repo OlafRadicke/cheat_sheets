@@ -3,6 +3,7 @@ init_vars_and_dirs () {
 
   printf "####################################### \n"
   printf "Init varables and directories: \n"
+  printf "/functions/init_vars_and_dirs.sh \n"
   printf "####################################### \n"
 
   export YUBIHSM_PKCS11_CONF=./yubihsm_pkcs11.conf
@@ -12,8 +13,8 @@ init_vars_and_dirs () {
   export TEST_FACTORY_PW=password
   export TEST_AUTH_KEY=2
   export TEST_AUTH_PW=password2
-  export TEST_ROOT_CA_KEY=0004
-  export TEST_ISSUE_CA_KEY=0005
+  export TEST_ROOT_CA_KEY=4
+  export TEST_ISSUE_CA_KEY=5
   export DEMO_TMP_DIR=./tmp
   export DEMO_CONFIG_DIR=./configs
 

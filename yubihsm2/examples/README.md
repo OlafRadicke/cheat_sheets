@@ -34,3 +34,10 @@ With more output enter:
 ```bash
 sudo -e -x demo_script.sh
 ```
+
+Directories
+-----------
+
+- ***/configs/[issue|root]_ca/*** - the configuration files of the ca
+- ***/functions*** - the bash (sub-)scripts
+- ***/tmp*** - the place of logs, certifikats, csr and other generated things.

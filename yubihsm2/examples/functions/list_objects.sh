@@ -5,6 +5,7 @@ list_objects () {
 
   printf "####################################### \n"
   printf "List opjects in yuniHSM2: \n"
+  printf "/functions/list_objects.sh \n"
   printf "####################################### \n"
 
   yubihsm-shell                                                               \

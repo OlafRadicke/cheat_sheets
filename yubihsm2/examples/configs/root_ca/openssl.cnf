@@ -1,9 +1,9 @@
 HOME                        = .
 
-################ HSM enabled ##################################################
-
-
 openssl_conf                = default_modules
+
+###############################################################################
+# YubiHSM2 enabeting
 
 [default_modules]
 engines                     = engine_section
@@ -15,12 +15,11 @@ pkcs11                      = pkcs11_section
 engine_id                   = pkcs11
 MODULE_PATH                 = /usr/lib64/pkcs11/yubihsm_pkcs11.so
 INIT_ARGS                   = connector=http://127.0.0.1:12345 debug
+# PIN                         = "0002password2"
 PIN                         = "0002password2"
 init                        = 0
 
-
 ###############################################################################
-
 
 
 [ ca ]
@@ -82,7 +81,7 @@ stateOrProvinceName         = Dummyfild
 localityName                = Dummy Town
 organizationName            = Dummy GmbH
 organizationalUnitName      = Security department
-commonName                  = hsm-root-ca-01.dum.my
+commonName                  = issue-ca.org
 emailAddress                = ca-admin@dum.my
 
 [ req_attributes ]

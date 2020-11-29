@@ -3,7 +3,8 @@
 create_ca_keys () {
 
   printf "####################################### \n"
-  printf "Kreate keys for ca: ${1} ${2} \n"
+  printf "/functions/change_factory_password.sh \n"
+  printf "/functions/create_ca_key.sh \n"
   printf "####################################### \n"
 
   yubihsm-shell                                                               \
