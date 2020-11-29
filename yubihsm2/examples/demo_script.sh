@@ -1,7 +1,8 @@
 #!/bin/bash
 clear
 
-#set -e
+# set -e
+set -u
 
 source ./functions/change_factory_password.sh
 source ./functions/create_ca_key.sh
@@ -13,21 +14,20 @@ source ./functions/openssl_self_signed_root_ca.sh
 source ./functions/software_rest.sh
 
 init_vars_and_dirs
-list_objects ${TEST_FACTORY_KEY} ${TEST_FACTORY_PW}
+list_objects ${FACTORY_KEY} ${FACTORY_PASSWORD}
 change_factory_password
-list_objects ${TEST_AUTH_KEY} ${TEST_AUTH_PW}
-create_ca_keys ${TEST_ROOT_CA_KEY} "root_ca_sign_key"
-list_objects ${TEST_AUTH_KEY} ${TEST_AUTH_PW}
-create_ca_keys ${TEST_ISSUE_CA_KEY} "issue_ca_sign_key"
-list_objects ${TEST_AUTH_KEY} ${TEST_AUTH_PW}
+list_objects ${AUTH_KEY} ${AUTH_PASSWORD}
+create_ca_keys ${ROOT_CA_KEY} "root_ca_sign_key"
+list_objects ${AUTH_KEY} ${AUTH_PASSWORD}
+create_ca_keys ${ISSUE_CA_KEY} "issue_ca_sign_key"
+list_objects ${AUTH_KEY} ${AUTH_PASSWORD}
 openssl_create_intermediate_ca_csr
 openssl_self_signed_root_ca
 openssl_root_ca_signed_issue_ca
 software_rest
 sleep 2
-list_objects ${TEST_FACTORY_KEY} ${TEST_FACTORY_PW}
+list_objects ${FACTORY_KEY} ${FACTORY_PASSWORD}
 
-# openssl_self_signed_root_ca
 
 
 

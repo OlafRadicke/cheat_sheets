@@ -6,23 +6,18 @@ init_vars_and_dirs () {
   printf "/functions/init_vars_and_dirs.sh \n"
   printf "####################################### \n"
 
-  export YUBIHSM_PKCS11_CONF=./yubihsm_pkcs11.conf
+  # export YUBIHSM_PKCS11_CONF=./yubihsm_pkcs11.conf
   export YUBIHSM_PKCS11_DBG=true
-  export TEST_SLOT=0
-  export TEST_FACTORY_KEY=1
-  export TEST_FACTORY_PW=password
-  export TEST_AUTH_KEY=2
-  export TEST_AUTH_PW=password2
-  export TEST_ROOT_CA_KEY=4
-  export TEST_ISSUE_CA_KEY=5
+  export HSM_SLOT=0
+  export FACTORY_KEY=1
+  export FACTORY_PASSWORD=password
+  export AUTH_KEY=2
+  export AUTH_PASSWORD=password2
+  export ROOT_CA_KEY=4
+  export ISSUE_CA_KEY=5
   export DEMO_TMP_DIR=./tmp
   export DEMO_CONFIG_DIR=./configs
 
   mkdir -p ${DEMO_TMP_DIR}
-  echo 'connector = http://127.0.0.1:12345' > ${YUBIHSM_PKCS11_CONF}
-  echo 'debug' >>  ${YUBIHSM_PKCS11_CONF}
-  echo 'dinout' >>  ${YUBIHSM_PKCS11_CONF}
-  echo 'libdebug' >>  ${YUBIHSM_PKCS11_CONF}
-  echo "debug-file = ${DEMO_TMP_DIR}/debug_out" >>  ${YUBIHSM_PKCS11_CONF}
 
 }

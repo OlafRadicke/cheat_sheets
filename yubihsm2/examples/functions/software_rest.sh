@@ -9,8 +9,8 @@ software_rest() {
 
   yubihsm-shell                                                               \
     --action=reset                                                            \
-    --domains=${TEST_SLOT}                                                    \
-    --authkey=${TEST_AUTH_KEY}                                                \
-    --password="${TEST_AUTH_PW}"
+    --domains=${HSM_SLOT}                                                     \
+    --authkey=${AUTH_KEY}                                                     \
+    --password="${AUTH_PASSWORD}"
 
 }
