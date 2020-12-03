@@ -205,3 +205,8 @@ Catch errors and return debug info
     when:          shell_result.rc != 0
   when:            shell_result.rc is defined
 ```
+
+Other ansible tools:
+--------------------
+
+* [Ansible Bender (ansible in container)](https://github.com/ansible-community/ansible-bender)

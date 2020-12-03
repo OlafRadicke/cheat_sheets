@@ -30,8 +30,8 @@ Generate and verify digital signatures
 
 ```bash
 export YUBIHSM_PKCS11_CONF=./yubihsm_pkcs11.conf
-TEST_AUTH_KEY=1
-TEST_AUTH_PW=password
+AUTH_KEY=1
+AUTH_PASSWORD=password
 TEST_SIGN_KEY=0004
 
 echo 'connector = http://127.0.0.1:12345' > ${YUBIHSM_PKCS11_CONF}
@@ -41,8 +41,8 @@ yubihsm-shell                                                                 \
  --domains=0                                                                  \
  --object-type=any                                                            \
  --algorithm=any                                                              \
- --authkey="${TEST_AUTH_KEY}"                                                 \
---password="${TEST_AUTH_PW}"                                                  \
+ --authkey="${AUTH_KEY}"                                                 \
+--password="${AUTH_PASSWORD}"                                                  \
 
 yubihsm-shell                                                                 \
   --action=generate-asymmetric-key                                            \
@@ -50,8 +50,8 @@ yubihsm-shell                                                                 \
   --label="root_ca_sign_key"                                                  \
   --algorithm="rsa3072"                                                       \
   --capabilities=sign-pkcs,sign-pss,sign-ecdsa,sign-eddsa,sign-ssh-certificate \
-  --authkey=${TEST_AUTH_KEY}                                                  \
-  --password="${TEST_AUTH_PW}"
+  --authkey=${AUTH_KEY}                                                  \
+  --password="${AUTH_PASSWORD}"
 
 openssl req                                                                   \
   -new                                                                        \
@@ -73,7 +73,7 @@ openssl req                                                                   \
   -config ./openssl.cnf                                                       \
   -extensions v3_ca                                                           \
   -engine pkcs11                                                              \
-  -key "${TEST_AUTH_KEY}:${TEST_SIGN_KEY}"                                    \
+  -key "${AUTH_KEY}:${TEST_SIGN_KEY}"                                    \
   -keyform engine                                                             \
   -out ./hsm-root-ca-01.dum.my.crt.pem
 
@@ -85,7 +85,7 @@ openssl req                                                                   \
   -config ./openssl.cnf                                                       \
   -extensions v3_ca                                                           \
   -engine pkcs11                                                              \
-  -key "000${TEST_AUTH_KEY}:${TEST_SIGN_KEY}"                                 \
+  -key "000${AUTH_KEY}:${TEST_SIGN_KEY}"                                 \
   -keyform engine                                                             \
   -out ./hsm-root-ca-01.dum.my.crt.pem
 
@@ -106,8 +106,8 @@ yubihsm-shell                                                                 \
  --domains=0                                                                  \
  --object-type=any                                                            \
  --algorithm=any                                                              \
- --authkey="${TEST_AUTH_KEY}"                                                 \
- --password="${TEST_AUTH_PW}"
+ --authkey="${AUTH_KEY}"                                                 \
+ --password="${AUTH_PASSWORD}"
 ```
 
 OpenSSL config:
