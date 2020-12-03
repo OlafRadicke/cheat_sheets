@@ -13,7 +13,7 @@ Cheat sheets
 * [YubiHSM2](yubihsm2/yubihsm2.md)
 * [(Small) Tools](tools/) / [README](tools/README.md)
   * [cfssl](tools/cfssl.md)
-  * [curl](tools/curl.md)
+  * [CouchDB](tools/couchdb.md)
   * [OpenSSL](tools/openssl.md)
   * [Journal CTL](tool/journalctl.md)
   * [LUKS](tools/luks.md)
