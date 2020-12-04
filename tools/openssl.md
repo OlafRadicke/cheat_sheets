@@ -26,7 +26,10 @@ Check Certificate
 -----------------
 
 ```bash
-openssl x509 -noout -text -in jane_doe.crt
+$ openssl x509 \
+    -noout \
+    -text \
+    -in jane_doe.crt
 ```
 
 check cert bundle
