@@ -5,7 +5,21 @@ Check Certificate Signing Request (CSR)
 ---------------------------------------
 
 ```bash
-openssl req -noout -text -in jane_doe.csr
+$ openssl req \
+    -noout \
+    -text \
+    -in jane_doe.csr
+```
+
+View key file
+-------------
+
+```bash
+$ openssl \
+    -noout \
+    -text \
+    -passin "pass:this-is-my-password" \
+    -in my-key-file.pem
 ```
 
 Check Certificate
