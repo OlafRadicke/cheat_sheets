@@ -14,12 +14,19 @@ From all name spaces, enter:
 kubectl get pods -A
 ```
 
+Wit detail information
+
+```bash
+kubectl get pods --output=wide -A
+```
+
 Get cluster nodes
 -----------------
 
 ```bash
 kubectl get nodes
 ```
+
 
 List of services
 ----------------

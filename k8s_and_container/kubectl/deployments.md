@@ -9,7 +9,7 @@ Delete deployments
 ------------------
 
 ```bash
-kubectl delete deployment my-pod
+kubectl delete deployment my-pod -n my-namespace
 ```
 
 Using a private image repository with secrets
