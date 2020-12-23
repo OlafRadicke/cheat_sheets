@@ -206,6 +206,21 @@ Catch errors and return debug info
   when:            shell_result.rc is defined
 ```
 
+or
+
+```yaml
+- block:
+  - name:       View the content of private key
+    shell:      cat /ml/hello_world.txt
+    register:   shell_result
+
+  rescue:
+
+  - name:       Output return value
+    debug:
+      msg:      "{{ shell_result }}"
+```
+
 Other ansible tools:
 --------------------
 
