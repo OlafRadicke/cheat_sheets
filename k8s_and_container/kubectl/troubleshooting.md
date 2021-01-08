@@ -69,3 +69,16 @@ $ kubectl exec -it buildbot-demo sh
 buildbot.tac       http.log           master.cfg         master.cfg.sample  start_buildbot.sh  twistd.pid
 /srv/buildbot $
 ```
+
+### Get events ###
+
+bash```
+$ kubectl get events -n bla
+
+LAST SEEN   TYPE      REASON               OBJECT                                        MESSAGE
+10m         Warning   FailedScheduling     pod/influxdb-59fc9776bb-jzct9                 0/1 nodes are available: 1 pod has unbound immediate PersistentVolumeClaims.
+10m         Warning   FailedScheduling     pod/influxdb-59fc9776bb-jzct9                 0/1 nodes are available: 1 pod has unbound immediate PersistentVolumeClaims.
+10m         Normal    SuccessfulCreate     replicaset/influxdb-59fc9776bb                Created pod: influxdb-59fc9776bb-jzct9
+4s          Warning   ProvisioningFailed   persistentvolumeclaim/influxdb-managed-disk   no volume plugin matched name: kubernetes.io/Azure-disk
+10m         Normal    ScalingReplicaSet    deployment/influxdb                           Scaled up replica set influxdb-59fc9776bb to 1
+```
