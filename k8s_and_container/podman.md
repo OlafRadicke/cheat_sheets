@@ -47,3 +47,10 @@ podman pod rm -f -a
 ```bash
 podman pod top 24b211d1fe7e
 ```
+
+Port listing
+------------
+
+```bash
+podman port -a
+```

@@ -9,6 +9,9 @@ kubectl describe pod lb-69967cfdb-jlsf5
 
 ```
 
+```bash
+$ kubectl describe pod monitoring-677f86fcff-27mjl -n monitoring-01
+
 Get details of all Pods
 -----------------------
 
