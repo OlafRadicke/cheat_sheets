@@ -50,6 +50,12 @@ kubectl exec -it my-pod-k8s-5cd4c85695-8lxlc sh
 
 ```
 
+or
+
+```bash
+$ kubectl exec -it [pod-name] -c [container-name] -n [namespace]  -- sh
+```
+
 Attach on crashed pods
 ----------------------
 
