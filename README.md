@@ -2,15 +2,15 @@ Cheat sheets
 ============
 
 * [Ansible](ansible/)
-* [AWS](aws/README.md)
-* [Azure cloud](azure/)
+* [CI/CD and Release management](cicd/README.md)
 * [Kubernetes and container](k8s_and_container/README.md)
 * [Linux](linux/)
-* [OpenStack](openstack.md)
-* [CI/CD and Release management](cicd/README.md)
-* [ssh](tools/ssh.md)
+* [Private cloud](private_cloud)
+  * [OpenStack](private_cloud/OpenStack/main.md)
+* [Public cloud](public_cloud)
+  * [AWS](aws/README.md)
+  * [Azure cloud](azure/)
 * [Terraform](terraform/)
-* [YubiHSM2](yubihsm2/yubihsm2.md)
 * [(Small) Tools](tools/) / [README](tools/README.md)
   * [cfssl](tools/cfssl.md)
   * [CouchDB](tools/couchdb.md)
@@ -18,6 +18,8 @@ Cheat sheets
   * [Journal CTL](tool/journalctl.md)
   * [LUKS](tools/luks.md)
   * [YubiHSM2](tools/yubihsm2.md)
+  * [ssh](tools/ssh.md)
+  * [YubiHSM2](yubihsm2/yubihsm2.md)
 
 Helpful tools for makedown
 --------------------------
