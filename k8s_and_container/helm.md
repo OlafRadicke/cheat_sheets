@@ -8,6 +8,7 @@ Check available versions: [GitHub Project](https://github.com/helm/helm/releases
 
 ```bash
 HELMVERSION=3.2.0-rc.1
+HELMVERSION=3.5.4
 wget https://get.helm.sh/helm-v${HELMVERSION}-linux-amd64.tar.gz
 tar -xvzf ./helm-v${HELMVERSION}-linux-amd64.tar.gz
 sudo cp ./linux-amd64/helm  /usr/local/bin/helm
@@ -43,7 +44,7 @@ Overview about available helm commands
   upgrade     upgrade a release
   verify      verify that a chart at the given path has been signed and is valid
   version     print the client version information
-  
+
 ```
 
 Working with helm charts
@@ -76,7 +77,7 @@ helm search repo gitlab
 ### Information about an chart ###
 
 ```bash
-helm show chart stable/gitlab-ce 
+helm show chart stable/gitlab-ce
 ```
 
 ### Get and configure chart variables ###
@@ -158,7 +159,7 @@ Known issue
 ### k3s: "Kubernetes cluster unreachable" ###
 
 ```bash
-[fedora@localhost ~]$ helm install my-postgresql-installation stable/postgresql  
+[fedora@localhost ~]$ helm install my-postgresql-installation stable/postgresql
 WARNING: This chart is deprecated
 Error: Kubernetes cluster unreachable
 ```

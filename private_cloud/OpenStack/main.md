@@ -1,5 +1,5 @@
-OpenStack cheat sheet
-=====================
+OpenStack
+=========
 
 OpenStack client install
 ------------------------
