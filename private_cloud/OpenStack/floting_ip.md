@@ -9,6 +9,10 @@ Floating IP address
 $ openstack floating ip pool list
 ```
 
+```bash
+$ openstack floating ip list
+```
+
 ***Create floating ip***
 
 ```bash

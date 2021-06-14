@@ -40,3 +40,9 @@ $ openstack security group rule create \
   --remote-group SOURCE_GROUP_NAME \
   SECURITY_GROUP_NAME
 ```
+
+***Add a security group to a VM***
+
+```bash
+openstack server add security group <server> <group>
+```
