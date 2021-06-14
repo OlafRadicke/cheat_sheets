@@ -11,7 +11,7 @@ Cheat sheets
   * [AWS](aws/README.md)
   * [Azure cloud](azure/)
 * [Terraform](terraform/)
-* [(Small) Tools](tools/) / [README](tools/README.md)
+* [(Small) Tools](tools/)
   * [cfssl](tools/cfssl.md)
   * [CouchDB](tools/couchdb.md)
   * [OpenSSL](tools/openssl.md)
