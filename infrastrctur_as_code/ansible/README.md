@@ -41,7 +41,7 @@ Add a command like this:
 
 The errors of 301 and 303 ist ignore now.
 
-run an Ansible playbook locally
+Run an Ansible playbook locally
 -------------------------------
 
 Inventory:
