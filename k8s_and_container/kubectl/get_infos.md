@@ -54,6 +54,10 @@ Get infos about pvc
 -------------------
 
 ```bash
+kubectl get pv
+```
+
+```bash
 $ kubectl describe pv
 
 Name:              pvc-d2ed7e21-5b89-4e1b-a1a3-5992115eb6b6
