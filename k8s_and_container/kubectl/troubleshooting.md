@@ -83,7 +83,7 @@ buildbot.tac       http.log           master.cfg         master.cfg.sample  star
 
 ### Get events ###
 
-bash```
+```bash
 $ kubectl get events -n bla
 
 LAST SEEN   TYPE      REASON               OBJECT                                        MESSAGE
@@ -92,4 +92,16 @@ LAST SEEN   TYPE      REASON               OBJECT                               
 10m         Normal    SuccessfulCreate     replicaset/influxdb-59fc9776bb                Created pod: influxdb-59fc9776bb-jzct9
 4s          Warning   ProvisioningFailed   persistentvolumeclaim/influxdb-managed-disk   no volume plugin matched name: kubernetes.io/Azure-disk
 10m         Normal    ScalingReplicaSet    deployment/influxdb                           Scaled up replica set influxdb-59fc9776bb to 1
+```
+
+
+ImagePullBackOff
+----------------
+
+Pull image interactive
+
+```bash
+$ sudo crictl pull --creds "sp-ansible:XEHLwnCYayXXXXXXX"   "gitlab-01-01.room-dev.lab-sn.de:5050/secure-collaboration-room/sr-portal/sr-portal:1.2.3"
+
+Image is up to date for sha256:0600ad29e4b4ea05fb1c80912356dbf305118924046af7b6d2904e64a6c58c78
 ```
