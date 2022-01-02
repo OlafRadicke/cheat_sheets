@@ -21,6 +21,7 @@ Cheat sheets
   * [YubiHSM2](tools/yubihsm2.md)
   * [ssh](tools/ssh.md)
   * [YubiHSM2](yubihsm2/yubihsm2.md)
+  * [Tools for evaluation of projects and software](tools/eval-tools.md)
 
 Helpful tools for makedown
 --------------------------
