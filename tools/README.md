@@ -12,6 +12,8 @@ List of helpful tools
   * [markdown icons](md-icons.md)
 * *mediawriter:* Fedora Media Writer for creat boot usb sticks
 * *geteltorito:* El Torito boot image extractor
+* *bash:*
+  * `systemd-run` for long running jobs
 
 
 VirtualBox
