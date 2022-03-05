@@ -221,6 +221,34 @@ or
       msg:      "{{ shell_result }}"
 ```
 
+
+Ansible wit jump hosts
+----------------------
+
+
+```yaml
+ansible_user:             "'{{ lookup('env', 'USER') }}'"
+jump_host:                10.20.12.211
+ansible_ssh_common_args:  '-o ProxyCommand="ssh -W %h:%p -q {{ ansible_user }}@{{ jump_host }}"'
+ansible_become:           yes
+```
+
+or
+
+
+```yaml
+ansible_user:             "'{{ lookup('env', 'USER') }}'"
+jump_host:                10.20.12.211
+ansible_ssh_common_args:  "-o ProxyCommand=\"ssh -o StrictHostKeyChecking=no -o ForwardAgent=yes -W %h:%p -q {{ ansible_user }}@{{ jump_host }}\""
+ansible_become:           yes
+```
+
+Is the same like:
+
+```bash
+ssh -J [jump host] [target host]
+```
+
 Other ansible tools:
 --------------------
 
