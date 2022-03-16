@@ -27,3 +27,16 @@ Use the –p [priority] option to display only log entries of a specific [priori
 ```bash
 journalctl -p crit
 ```
+
+Let run script in background
+----------------------------
+
+Let run script in background and check the progress.
+
+```bash
+$ sudo systemd-run --uid=s3backup  -r --description=started_from_olaf bash  -x  /srv/scripts/backupv5tos3.sh
+Running as unit: run-rce046e99531b47869abdcdda7bd19a56.service
+
+$ sudo journalctl -u run-rce046e99531b47869abdcdda7bd19a56.service
+
+```
