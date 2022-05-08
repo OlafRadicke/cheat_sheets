@@ -74,3 +74,30 @@ Access Modes:      RWO
 VolumeMode:        Filesystem
 Capacity:          2Gi
 ```
+
+About routing
+-------------
+
+Find ingress resources
+
+```
+kubectl get ingress -A
+```
+
+Show ingress routes:
+
+```
+kubectl describe ingressroutes -A
+```
+
+```
+sudo kubectl describe service traefik -n kube-system
+```
+
+```
+kubectl logs -f traefik-56c4b88c4b-j4686 -n kube-system
+```
+
+```
+kubectl get  IngressRoute -n kube-system
+```
