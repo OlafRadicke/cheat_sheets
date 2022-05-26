@@ -22,9 +22,11 @@ Cheat sheets
   * [ssh](tools/ssh.md)
   * [YubiHSM2](yubihsm2/yubihsm2.md)
   * [Tools for evaluation of projects and software](tools/eval-tools.md)
+  * [Step CLI (PKI)](https://github.com/smallstep/cli/blob/master/README.md)
 
 Helpful tools for makedown
 --------------------------
 
 * [ghostwriter](http://github.com/wereturtle/ghostwriter)
 * Visual Code extention: *Markdown Preview Enhanced*
+
