@@ -24,6 +24,22 @@ kubectl describe pods
 $ kubectl get pods -o wide
 ```
 
+Port forward
+------------
+
+```bash
+export POD_NAME=$(kubectl get pods --namespace testenv -l "app=my-concourse-web" -o jsonpath="{.items[0].metadata.name}")
+    kubectl port-forward --namespace testenv $POD_NAME 8080:8080
+```
+
+After this step visit now http://127.0.0.1:8080
+
+Is it on a remote host, open a new ssh connection with:
+
+```
+ssh -L [LOCAL_IP:]LOCAL_PORT:DESTINATION:DESTINATION_PORT [USER@]SSH_SERVER
+```
+
 Adhoc (network) checks
 ----------------------
 
