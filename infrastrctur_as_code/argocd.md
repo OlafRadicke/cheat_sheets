@@ -30,3 +30,8 @@ The install yaml need a change:
               configMapKeyRef:
                 key: server.insecure
 ```
+
+Links
+-----
+
+- [Project documentaion](https://argo-cd.readthedocs.io/en/stable/)
