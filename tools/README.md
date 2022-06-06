@@ -14,6 +14,14 @@ List of helpful tools
 * *geteltorito:* El Torito boot image extractor
 * *bash:*
   * `systemd-run` for long running jobs
+* Visual Code
+  * GitLens
+  * mhutchie.git-graph
+  * streetsidesoftware.code-spell-checker-german
+  * yzhang.markdown-all-in-one
+  * shd101wyy.markdown-preview-enhanced
+  * ms-vscode-remote.remote-ssh
+  * ms-vscode-remote.remote-wsl
 
 
 VirtualBox
