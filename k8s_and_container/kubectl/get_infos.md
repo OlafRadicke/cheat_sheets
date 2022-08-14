@@ -101,3 +101,10 @@ kubectl logs -f traefik-56c4b88c4b-j4686 -n kube-system
 ```
 kubectl get  IngressRoute -n kube-system
 ```
+
+Get infos about evalabile resources typs
+----------------------------------------
+
+```
+kubectl api-resources
+```

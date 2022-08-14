@@ -29,7 +29,7 @@ Port forward
 
 ```bash
 export POD_NAME=$(kubectl get pods --namespace testenv -l "app=my-concourse-web" -o jsonpath="{.items[0].metadata.name}")
-    kubectl port-forward --namespace testenv $POD_NAME 8080:8080
+    kubectl port-forward $POD_NAME 8080:8080 --namespace testenv 
 ```
 
 After this step visit now http://127.0.0.1:8080
