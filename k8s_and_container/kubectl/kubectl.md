@@ -38,27 +38,27 @@ Overview about the cluster
 
 For debugging and more...
 
-See [kubectl/get_infos.md](get_infos.md)
+See [get_infos.md](get_infos.md)
 
 
 Understanding namespaces and DNS
 --------------------------------
 
-See [kubectl/namespaces.md](namespaces.md)
+See [namespaces.md](namespaces.md)
 
 Troubleshooting
 ---------------
 
-See [kubectl/troubleshooting.md](troubleshooting.md)
+See [troubleshooting.md](troubleshooting.md)
 
 
 Delete deployments
 ------------------
 
-See [kubectl/deployments.md](deployments.md)
+See [deployments.md](deployments.md)
 
 
 Secrets
 -------
 
-See [kubectl/secrets.md](kubectl/secrets.md)
+See [secrets.md](secrets.md)
