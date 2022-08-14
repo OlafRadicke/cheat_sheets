@@ -14,7 +14,7 @@ Configuration
 ### Remote control (k3s) ###
 
 
-For remote controll of k3s, you have copy the file /etc/rancher/k3s/k3s.yaml 
+For remote controll of k3s, you have copy the file /etc/rancher/k3s/k3s.yaml
 to your control server, in the homedirectory of the control user:
 
 ```bash
@@ -38,24 +38,24 @@ Overview about the cluster
 
 For debugging and more...
 
-See [kubectl/get_infos.md](kubectl/get_infos.md)
+See [kubectl/get_infos.md](get_infos.md)
 
 
 Understanding namespaces and DNS
 --------------------------------
 
-See [kubectl/namespaces.md](kubectl/namespaces.md)
+See [kubectl/namespaces.md](namespaces.md)
 
 Troubleshooting
 ---------------
 
-See [kubectl/troubleshooting.md](kubectl/troubleshooting.md)
+See [kubectl/troubleshooting.md](troubleshooting.md)
 
 
 Delete deployments
 ------------------
 
-See [kubectl/deployments.md](kubectl/deployments.md)
+See [kubectl/deployments.md](deployments.md)
 
 
 Secrets
