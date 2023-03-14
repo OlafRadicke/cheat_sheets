@@ -135,9 +135,23 @@ RancherOS
 
 ### Install with ISO file ###
 
-* Configure a webserver with the node configuration (Cloud-Config). 
+* Configure a webserver with the node configuration (Cloud-Config).
 * Boot IOS image.
-* Enter 
+* Enter
 ```bash
 sudo ros install -c http://192.168.178.60/rancheros-01.yml -d /dev/sda
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

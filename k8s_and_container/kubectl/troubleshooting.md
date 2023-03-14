@@ -29,7 +29,7 @@ Port forward
 
 ```bash
 export POD_NAME=$(kubectl get pods --namespace testenv -l "app=my-concourse-web" -o jsonpath="{.items[0].metadata.name}")
-    kubectl port-forward $POD_NAME 8080:8080 --namespace testenv 
+    kubectl port-forward $POD_NAME 8080:8080 --namespace testenv
 ```
 
 After this step visit now http://127.0.0.1:8080
@@ -121,3 +121,14 @@ $ sudo crictl pull --creds "sp-ansible:XEHLwnCYayXXXXXXX"   "gitlab-01-01.room-d
 
 Image is up to date for sha256:0600ad29e4b4ea05fb1c80912356dbf305118924046af7b6d2904e64a6c58c78
 ```
+
+
+Ingress
+-------
+
+```bash
+$ kubectl logs -l app=ingress-nginx --since 10m
+```
+
+
+
