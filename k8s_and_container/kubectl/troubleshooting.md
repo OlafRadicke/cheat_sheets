@@ -131,4 +131,3 @@ $ kubectl logs -l app=ingress-nginx --since 10m
 ```
 
 
-
