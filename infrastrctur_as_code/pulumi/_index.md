@@ -63,6 +63,19 @@ pulumi up --yes
 
 See [pulumi.com/docs](https://www.pulumi.com/docs/cli/commands/pulumi_up/)
 
+Add a secret
+------------
+
+```bash
+pulumi config set --secret oauth2ProxyclientSecret XXXXXXXX
+```
+
+List secret
+-----------
+
+```bash
+pulumi config  --show-secrets
+```
 
 yaml support
 ------------
@@ -80,6 +93,7 @@ Remove stack
 ```bash
 PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/pulumi-passwd \
 pulumi destroy
+pulumi stack rm
 ```
 
 pulumi watch
@@ -88,6 +102,18 @@ pulumi watch
 
 This command watches the working directory or specified paths for the current project and updates the active stack whenever the project changes. In parallel, logs are collected for all resources in the stack and displayed along with update progress.
 
+Refresh the resources in a stack
+--------------------------------
+
+This command compares the current stack’s resource state with the state
+known to exist in the actual cloud provider. Any such changes are adopted
+nto the current stack. Note that if the program text isn’t updated
+accordingly, subsequent updates may still appear to be out of sync with
+respect to the cloud provider’s source of truth.
+
+```bash
+pulumi refresh
+```
 
 troubleshooting
 ---------------
