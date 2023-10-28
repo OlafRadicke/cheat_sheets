@@ -16,6 +16,17 @@ kubectl create secret docker-registry \
         secret/regcred created
 ```
 
+Create secret as yaml file
+--------------------------
+
+```bash
+kubectl create secret tls example-tls-secret \
+  --cert certificate.pem \
+  --key key.pem  \
+  --dry-run=true \
+  -o yaml
+```
+
 base64 encoding
 ---------------
 
