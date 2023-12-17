@@ -50,6 +50,14 @@ You have logged in. Now let us find all the subscriptions to which you have acce
   }
 ]
 ```
+
+or
+
+```bash
+TENANT_ID=$(az account show --query tenantId | tr -d \")
+az login  --tenant $TENANT_ID
+```
+
 ...The here "id" is the "Subscription ID".
 
 ### List all azure accounts ###

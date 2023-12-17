@@ -99,7 +99,6 @@ pulumi stack rm
 pulumi watch
 ------------
 
-
 This command watches the working directory or specified paths for the current project and updates the active stack whenever the project changes. In parallel, logs are collected for all resources in the stack and displayed along with update progress.
 
 Refresh the resources in a stack
