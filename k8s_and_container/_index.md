@@ -5,7 +5,7 @@ Subsites
 --------
 
 * [Helm](helm.md)
-* [ingress](k8s_and_container/ingress.md)
+* [ingress](ingress.md)
 * [kubectl (k8s/k3s)](kubectl.md)
 * [low level deployment](low_level_deployment.md)
 * [podman](podman.yml)

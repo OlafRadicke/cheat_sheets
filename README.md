@@ -5,7 +5,7 @@ Cheat sheets
 * [infrastrctur as code](infrastrctur_as_code)
   * [Ansible](infrastrctur_as_code/ansible/README.md)
   * [Terraform](infrastrctur_as_code/terraform/README.md)
-* [Kubernetes and container](k8s_and_container/README.md)
+* [Kubernetes and container](k8s_and_container/_index.md)
 * [Linux](linux/)
 * [Private cloud](private_cloud)
   * [OpenStack](private_cloud/OpenStack/main.md)
