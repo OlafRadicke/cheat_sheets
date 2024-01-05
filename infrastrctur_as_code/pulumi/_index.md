@@ -27,8 +27,16 @@ To use the passphrase secrets provider with the pulumi.com backend, use:
 
 ```bash
 pulumi new kubernetes-go \
-	--description="k3s IaC" \
+	--description="k3s IaC of baltic-sea" \
 	--name="baltic-sea" \
+	--secrets-provider=passphrase \
+	--stack="prod"
+```
+
+```bash
+pulumi new kubernetes-go \
+	--description="k3s IaC of atlantic-ocean" \
+	--name="atlantic-ocean" \
 	--secrets-provider=passphrase \
 	--stack="prod"
 ```
