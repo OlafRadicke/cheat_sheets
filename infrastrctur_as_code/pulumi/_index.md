@@ -16,9 +16,25 @@ Google provider as backend
 
 1. Install [CLI](https://cloud.google.com/docs/authentication/provide-credentials-adc?hl=de#how-to)
 2. Create Google Bucket
-3. Login in Google ```gcloud auth application-default login```
-4. Pulumi login: ```pulumi login gs://h9jedp3jch53psor```
+3. Login in Google ```gcloud auth login```
+4. Change project ```gcloud config set project pulumi-prod```
+5. Pulumi login: ```pulumi login gs://pulumi-atlantic-ocean```
 
+
+AZURE PROVIDER AS BACKEND
+-------------------------
+
+See
+
+- [installation-configuration](https://www.pulumi.com/registry/packages/azure/installation-configuration/)
+- [state](https://www.pulumi.com/docs/concepts/state/)
+
+```bash
+$ pulumi config set azure:clientId <clientID>
+$ pulumi config set azure:clientSecret <clientSecret> --secret
+$ pulumi config set azure:tenantId <tenantID>
+$ pulumi config set azure:subscriptionId <subscriptionId>
+```
 
 Create new Pulumi project
 -------------------------
