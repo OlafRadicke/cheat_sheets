@@ -41,6 +41,8 @@ Create new Pulumi project
 
 To use the passphrase secrets provider with the pulumi.com backend, use:
 
+Example for Kubernetes
+
 ```bash
 pulumi new kubernetes-go \
 	--description="k3s IaC of baltic-sea" \
@@ -49,12 +51,14 @@ pulumi new kubernetes-go \
 	--stack="prod"
 ```
 
+Example for Azure Cliud
+
 ```bash
-pulumi new kubernetes-go \
-	--description="k3s IaC of atlantic-ocean" \
-	--name="atlantic-ocean" \
-	--secrets-provider=passphrase \
-	--stack="prod"
+$ pulumi new azure-go \
+        --description="IaC of Azur" \
+        --name="azure" \
+        --secrets-provider=passphrase \
+        --stack="prod"
 ```
 
 Alternative for other templates:

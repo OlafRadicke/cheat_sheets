@@ -1,6 +1,13 @@
 podman
 ======
 
+LOGIN BY hub.docker.com
+-----------------------
+
+```bash
+podman login hub.docker.com
+```
+
 Deploy K8S-Deployment
 ---------------------
 
@@ -45,7 +52,7 @@ podman pod rm -f -a
 ### Top ###
 
 ```bash
-podman pod top 24b211d1fe7e
+podman pod top
 ```
 
 Port listing
