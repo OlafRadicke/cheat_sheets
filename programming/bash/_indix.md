@@ -24,3 +24,16 @@ else
 	echo "var is set to '$MY_ENV_VAR'"
 fi
 ```
+
+FUNCTIONS AND ARRAYS
+--------------------
+
+
+```bash
+function callingSomeFunction ()
+{
+    for value in "$@"; do # You want to use "$@" here, not "$*" !!!!!
+        :
+    done
+}
+```
