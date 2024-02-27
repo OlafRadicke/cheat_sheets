@@ -138,4 +138,20 @@ Ingress
 $ kubectl logs -l app=ingress-nginx --since 10m
 ```
 
+Kubernetes Namespaces stuck in Terminating status
+-------------------------------------------------
 
+```bash
+NAMESPACE=hugo-operator-system ; \
+kubectl get namespace $NAMESPACE -o json \
+| jq 'del(.spec.finalizers[0])' \
+| kubectl replace --raw "/api/v1/namespaces/$NAMESPACE/finalize" -f -
+```
+
+Kubernetes pod stuck in Terminating status
+------------------------------------------
+
+
+```bash
+kubectl delete pod xxxxx --force
+```
