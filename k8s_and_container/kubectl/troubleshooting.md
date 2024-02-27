@@ -153,5 +153,13 @@ Kubernetes pod stuck in Terminating status
 
 
 ```bash
-kubectl delete pod xxxxx --force
+kubectl delete pod xxxxx --grace-period=0  --force -n namespace
+```
+
+Remove a node from cluster
+
+```bash
+kubectl cordon <node-name>
+kubectl drain <node-name> --force --ignore-daemonsets  --delete-emptydir-data
+kubectl delete node <node-name>
 ```
