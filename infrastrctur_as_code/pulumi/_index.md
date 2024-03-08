@@ -36,6 +36,24 @@ $ pulumi config set azure:tenantId <tenantID>
 $ pulumi config set azure:subscriptionId <subscriptionId>
 ```
 
+GENERIC AWS COMPATIBLE S3
+-------------------------
+
+```bash
+$ PULUMI_CONFIG_PASSPHRASE='XXXXXXXXXXX'
+$ AWS_ACCESS_KEY_ID=XXXXXXXXX
+$ AWS_SECRET_ACCESS_KEY=XXXXXXXXX
+$ pulumi login 's3://pulumi?region=us-west-1&endpoint=us-west-1.storage.impossibleapi.net'
+```
+
+HANDLE PULUNI PASSWORD
+----------------------
+
+Set the Environment variables `PULUMI_CONFIG_PASSPHRASE` or create
+an passwordfile under and `${HOME}/.ssh/quakers-social/pulumi` and
+set `PULUMI_CONFIG_PASSPHRASE_FILE=${HOME}/.ssh/quakers-social/pulumi`
+and than enter the script:
+
 Create new Pulumi project
 -------------------------
 
