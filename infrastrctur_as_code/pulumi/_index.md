@@ -1,6 +1,25 @@
 PULUMI
 ======
 
+- [PULUMI](#pulumi)
+	- [Install Pulumi](#install-pulumi)
+	- [Google provider as backend](#google-provider-as-backend)
+	- [AZURE PROVIDER AS BACKEND](#azure-provider-as-backend)
+	- [GENERIC AWS COMPATIBLE S3](#generic-aws-compatible-s3)
+	- [HANDLE PULUNI PASSWORD](#handle-puluni-password)
+	- [Create new Pulumi project](#create-new-pulumi-project)
+	- [Deploy stack](#deploy-stack)
+	- [Add a secret](#add-a-secret)
+	- [List secret](#list-secret)
+	- [yaml support](#yaml-support)
+	- [Helm Chart support](#helm-chart-support)
+	- [Remove stack](#remove-stack)
+	- [pulumi watch](#pulumi-watch)
+	- [Refresh the resources in a stack](#refresh-the-resources-in-a-stack)
+	- [troubleshooting](#troubleshooting)
+	- [READ AND CHANGE YAML FILES](#read-and-change-yaml-files)
+
+
 Install Pulumi
 --------------
 
@@ -106,7 +125,6 @@ pulumi up --yes
 
 ```
 
-
 See [pulumi.com/docs](https://www.pulumi.com/docs/cli/commands/pulumi_up/)
 
 Add a secret
@@ -170,3 +188,57 @@ pulumi whoami -v
 ```
 
 See [troubleshooting](https://www.pulumi.com/docs/support/troubleshooting/)
+
+
+READ AND CHANGE YAML FILES
+--------------------------
+
+By example:
+
+```go
+package gocode
+
+import (
+	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+)
+
+func PGCluster(ctx *pulumi.Context, nameSpaceName string) error {
+
+	transformations := []yaml.Transformation{
+		// Make every service private to the cluster, i.e., turn all services into ClusterIP
+		// instead of LoadBalancer.
+		func(state map[string]interface{}, opts ...pulumi.ResourceOption) {
+			if state["kind"] == "PostgresCluster" {
+				spec := state["spec"].(map[string]interface{})
+				// spec["type"] = "ClusterIP"
+				backups := spec["backups"].(map[string]interface{})
+				pgbackrest := backups["pgbackrest"].(map[string]interface{})
+				repos := pgbackrest["repos"].([]interface{})
+
+				repo01 := make(map[string]interface{})
+				repo01["name"] = "repo1"
+
+				s3 := make(map[string]interface{})
+				s3["bucket"] = "bucket"
+				s3["endpoint"] = "endpoint"
+				s3["region"] = "region"
+
+				repo01["s3"] = s3
+				repos[0] = repo01
+			}
+		},
+	}
+
+	_, err := yaml.NewConfigFile(ctx, "pg-cluster", &yaml.ConfigFileArgs{
+		File:            "yaml/pg-cluster/*.yaml",
+		Transformations: transformations,
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+
+}
+```
