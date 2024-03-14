@@ -18,6 +18,7 @@ PULUMI
 	- [Refresh the resources in a stack](#refresh-the-resources-in-a-stack)
 	- [troubleshooting](#troubleshooting)
 	- [READ AND CHANGE YAML FILES](#read-and-change-yaml-files)
+	- [CREATE KUBERNETES SECRETS](#create-kubernetes-secrets)
 
 
 Install Pulumi
@@ -240,5 +241,41 @@ func PGCluster(ctx *pulumi.Context, nameSpaceName string) error {
 	}
 	return nil
 
+}
+```
+
+CREATE KUBERNETES SECRETS
+-------------------------
+
+By example:
+
+```go
+package gocode
+
+import (
+	"github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/yaml"
+	core "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/core/v1"
+	meta "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/meta/v1"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+)
+
+func PGCluster(ctx *pulumi.Context, nameSpaceName string) error {
+	cfg := config.New(ctx, "")
+	postgresS3BackupSecret := cfg.RequireSecret("postgres_s3_backup_secret")
+
+	_, err := core.NewSecret(ctx, "postgres-s3-backup-secret", &core.SecretArgs{
+		Metadata: &meta.ObjectMetaArgs{
+			Name:      pulumi.String("postgres-s3-backup-secret"),
+			Namespace: pulumi.String(nameSpaceName),
+		},
+		Type: pulumi.String("Opaque"),
+		StringData: pulumi.StringMap{
+			"s3.conf": postgresS3BackupSecret,
+		},
+	})
+	if err != nil {
+		return err
+	}
 }
 ```
