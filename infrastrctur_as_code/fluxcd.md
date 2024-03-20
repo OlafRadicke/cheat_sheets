@@ -15,6 +15,11 @@ TROUBLESHOOTING
 ### GETTING BASIC INFORMATION
 
 ```bash
+$ flux check
+```
+or
+
+```bash
 $ flux get all -A
 ```
 
