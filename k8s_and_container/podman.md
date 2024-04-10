@@ -49,6 +49,12 @@ Delete all pods
 podman pod rm -f -a
 ```
 
+### Remove all images and containers.
+
+```bash
+podman rmi -a -f
+```
+
 ### Top ###
 
 ```bash
