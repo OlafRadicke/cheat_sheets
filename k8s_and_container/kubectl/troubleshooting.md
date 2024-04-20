@@ -1,6 +1,14 @@
 Troubleshooting
 ===============
 
+
+Get a overview about nodes
+--------------------------
+
+```bash
+kubectl describe node
+```
+
 Get pod details
 ---------------
 
