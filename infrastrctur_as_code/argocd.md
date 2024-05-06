@@ -2,11 +2,51 @@ ArgoCD
 ======
 
 
-Get password (default user admin):
+Get password
+------------
+
+(default user admin)
+
 
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
+
+Connect web console
+-------------------
+
+```bash
+kubectl port-forward service/argocd-server -n argocd 8080:80
+```
+
+Use Helm Chart in a git repo
+----------------------------
+
+
+```yaml
+---
+
+apiVersion:         argoproj.io/v1alpha1
+kind:               Application
+metadata:
+  name:             firefish-quakers-social
+  namespace:        argocd
+spec:
+  project:          firefish-quakers-social
+  source:
+    path:           chart
+    repoURL:        https://firefish.dev/iacore/firefish.git
+    targetRevision: develop
+    helm:
+      valuesObject:
+        firefish:
+          isManagedHosting: true
+  destination:
+    server:         https://kubernetes.default.svc
+    namespace:      argocd-aoa
+```
+
+
 
 Known issue
 -----------
