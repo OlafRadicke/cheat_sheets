@@ -1,0 +1,66 @@
+---
+
+name: Pulumi
+on: push
+  # push:
+  #   tags:
+  #     - '*'
+jobs:
+  pulumiDryRun:
+    name: Pulumi dry run
+    runs-on: ubuntu-latest
+    steps:
+      - name: git clone
+        uses: actions/checkout@v4
+      - name: download charts
+        run: |
+          ./scripts/install_k8s_dependencies.sh
+          ./scripts/download_pg_operator_chart.sh
+      - name: Pulumi up
+        uses: pulumi/actions@v5
+        with:
+          command: preview
+          stack-name: dev
+          work-dir: ./pulumi
+          cloud-url: s3://pulumi?region=us-west-1&endpoint=us-west-1.storage.impossibleapi.net
+          secrets-provider: passphrase
+        env:
+          KUBECONFIG: "/home/runner/work/crash-and-burn/crash-and-burn/kubeconfig"
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-west-1'
+  pulumiUp:
+    name: Pulumi run
+    if: github.ref_type == 'tag'
+    needs:
+      - pulumiDryRun
+    runs-on: ubuntu-latest
+    steps:
+      - name: git clone
+        uses: actions/checkout@v4
+      - name: download K8s-tool,go libs and charts
+        run: |
+          ./scripts/install_k8s_dependencies.sh
+          ./scripts/download_pg_operator_chart.sh
+      - name: create kubeconfig
+        run: echo "${KUBE_CONFIG}" > ${KUBECONFIG} && wc ${KUBECONFIG}
+        env:
+          KUBECONFIG: "/home/runner/work/crash-and-burn/crash-and-burn/kubeconfig"
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      - name: downloading go mod dependencies
+        run: cd ./pulumi && go mod download
+      - name: Pulumi up
+        uses: pulumi/actions@v5
+        with:
+          command: up
+          stack-name: dev
+          work-dir: ./pulumi
+          cloud-url: 's3://pulumi?region=us-west-1&endpoint=us-west-1.storage.impossibleapi.net'
+          secrets-provider: passphrase
+        env:
+          KUBECONFIG: "/home/runner/work/crash-and-burn/crash-and-burn/kubeconfig"
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-west-1'
