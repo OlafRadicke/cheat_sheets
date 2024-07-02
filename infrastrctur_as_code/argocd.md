@@ -71,6 +71,33 @@ The install yaml need a change:
                 key: server.insecure
 ```
 
+Alternativ:
+
+```yaml
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-cmd-params-cm
+    app.kubernetes.io/part-of: argocd
+    name: argocd-cmd-params-cm
+    namespace: argocd
+data:
+  server.insecure: "true"
+```
+
+
+And enter for restart:
+
+```bash
+$ kubectl apply -f ./manuel-conf/insecure.yaml
+
+$ kubectl scale -n argocd deployment/argocd-server --replicas=0 && \
+  kubectl scale -n argocd deployment/argocd-server --replicas=1
+```
+
+
 Links
 -----
 
