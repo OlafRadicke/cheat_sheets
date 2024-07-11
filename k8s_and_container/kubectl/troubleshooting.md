@@ -1,6 +1,23 @@
 Troubleshooting
 ===============
 
+- [Troubleshooting](#troubleshooting)
+	- [Get a overview about nodes](#get-a-overview-about-nodes)
+	- [Get pod details](#get-pod-details)
+	- [Get details of all Pods](#get-details-of-all-pods)
+	- [Port forward](#port-forward)
+	- [Adhoc (network) checks](#adhoc-network-checks)
+	- [Get logs of http-application-routing](#get-logs-of-http-application-routing)
+	- [Attach on running pod](#attach-on-running-pod)
+	- [Attach on crashed pods](#attach-on-crashed-pods)
+		- [Get events](#get-events)
+	- [ImagePullBackOff](#imagepullbackoff)
+	- [Ingress](#ingress)
+	- [Kubernetes Namespaces stuck in Terminating status](#kubernetes-namespaces-stuck-in-terminating-status)
+	- [Kubernetes pod stuck in Terminating status](#kubernetes-pod-stuck-in-terminating-status)
+	- [Check image tags docker registy](#check-image-tags-docker-registy)
+
+
 
 Get a overview about nodes
 --------------------------
@@ -170,4 +187,20 @@ Remove a node from cluster
 kubectl cordon <node-name>
 kubectl drain <node-name> --force --ignore-daemonsets  --delete-emptydir-data
 kubectl delete node <node-name>
+```
+
+Check image tags docker registy
+-------------------------------
+
+```bash
+$ curl -X GET https://docker.edu-sharing.com/v2/community/common/edu_sharing-communit
+y-common-docker-redis-cluster/tags/list
+
+{"name":"community/common/edu_sharing-community-common-docker-redis-cluster","tags":["6.2.14","6.2.7","develop-SNAPSHOT","main-SNAPSHOT","master-SNAPSHOT"]}
+```
+
+```bash
+$ curl -X GET https://myregistry:5000/v2/_catalog
+
+{"repositories":["redis","ubuntu"]}
 ```
