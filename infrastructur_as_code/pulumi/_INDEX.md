@@ -4,6 +4,7 @@ PULUMI
 - [PULUMI](#pulumi)
 	- [INSTALL PULUMI](#install-pulumi)
 	- [BACKENDS](#backends)
+		- [CHECK BACKEND](#check-backend)
 		- [GOOGLE](#google)
 		- [AZURE](#azure)
 		- [GENERIC AWS COMPATIBLE S3](#generic-aws-compatible-s3)
@@ -33,6 +34,16 @@ curl -fsSL https://get.pulumi.com | sh
 
 BACKENDS
 --------
+
+### CHECK BACKEND
+
+```bash
+$ pulumi whoami -v
+User: or
+Organizations:
+Backend URL: gs://pulumi-atlantic-ocean
+Token type: personal
+```
 
 ### GOOGLE
 
