@@ -17,3 +17,5 @@ Tools
 
 * [microk8s](https://kubernetes.io/blog/2019/11/26/running-kubernetes-locally-on-linux-with-microk8s/)
 * [microdnf / fedora-minimal](https://fedoramagazine.org/building-smaller-container-images/)
+* [kube-capacity](https://github.com/robscott/kube-capacity)
+* [kubectx](https://github.com/ahmetb/kubectx)
