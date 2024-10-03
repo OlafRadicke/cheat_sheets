@@ -25,7 +25,7 @@ graph TD;
     B-->D;
     C-->D;
 ```
-
+See mor: [mermaid.js.org](https://mermaid.js.org/intro/getting-started.html)
 
 ### ICONS
 
