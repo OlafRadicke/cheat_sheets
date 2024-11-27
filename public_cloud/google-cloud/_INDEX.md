@@ -17,6 +17,14 @@ LOGIN
 gcloud auth login
 ```
 
+or
+
+```bash
+gcloud auth application-default set-quota-project XYZ-project
+gcloud config set project XYX-project
+gcloud auth application-default login
+```
+
 ### LIST
 
 ```bash
