@@ -8,6 +8,18 @@ OpenStack client install
 $ sudo dnf install python-openstackclient
 ```
 
+OpenStack Client configuration
+------------------------------
+
+Download RC  file and enter:
+
+
+```bash
+$ source 9231-openstack-4707c-openrc.sh
+$ openstack ec2 credentials create
+```
+
+
 List availability zones
 -----------------------
 
