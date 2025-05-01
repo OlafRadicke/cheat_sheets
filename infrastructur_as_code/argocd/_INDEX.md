@@ -1,6 +1,16 @@
 ArgoCD
 ======
 
+- [ArgoCD](#argocd)
+  - [Get password](#get-password)
+  - [Connect web console](#connect-web-console)
+  - [Use Helm Chart in a git repo](#use-helm-chart-in-a-git-repo)
+  - [Known issue](#known-issue)
+    - [ArgoCD =\> ERR\_TOO\_MANY\_REDIRECTS](#argocd--err_too_many_redirects)
+  - [Links](#links)
+  - [Waves](#waves)
+
+
 
 Get password
 ------------
@@ -102,3 +112,22 @@ Links
 -----
 
 - [Project documentaion](https://argo-cd.readthedocs.io/en/stable/)
+
+
+Waves
+-----
+
+Specify the wave using the following annotation:
+
+```yaml
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+```
+
+When Argo CD starts a sync, it orders the resources in the following precedence:
+
+- The phase
+- The wave they are in (lower values first for creation & updation and higher values first for deletion)
+- By kind (e.g. namespaces first and then other Kubernetes resources, followed by custom resources)
+- By name
