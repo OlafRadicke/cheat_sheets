@@ -9,6 +9,8 @@ ArgoCD
     - [ArgoCD =\> ERR\_TOO\_MANY\_REDIRECTS](#argocd--err_too_many_redirects)
   - [Links](#links)
   - [Waves](#waves)
+  - [Trouble shooting](#trouble-shooting)
+    - [Argocd application resource stuck at deletion](#argocd-application-resource-stuck-at-deletion)
 
 
 
@@ -131,3 +133,14 @@ When Argo CD starts a sync, it orders the resources in the following precedence:
 - The wave they are in (lower values first for creation & updation and higher values first for deletion)
 - By kind (e.g. namespaces first and then other Kubernetes resources, followed by custom resources)
 - By name
+
+
+Trouble shooting
+----------------
+
+### Argocd application resource stuck at deletion
+
+
+```bash
+$ kubectl patch app APP_NAME -p '{"metadata": {"finalizers": null}}' --type merge
+```
