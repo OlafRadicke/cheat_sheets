@@ -116,7 +116,7 @@ Set variables
 ### CLI flags
 
 ```bash
-$ terraform plan   -var "vault_token=${VAULT_TOKEN}"
+$ terraform plan -var "vault_token=${VAULT_TOKEN}"
 ```
 
 ### Environment variables
