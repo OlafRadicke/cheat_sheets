@@ -1,6 +1,19 @@
 Terraform cheat sheets
 ======================
 
+- [Terraform cheat sheets](#terraform-cheat-sheets)
+  - [Terraform install](#terraform-install)
+  - [Basic commands](#basic-commands)
+  - [State files on network storage](#state-files-on-network-storage)
+  - [Remove Terraform lock file](#remove-terraform-lock-file)
+  - [Resync Terraform state](#resync-terraform-state)
+  - [External documentation](#external-documentation)
+  - [Set variables](#set-variables)
+    - [CLI flags](#cli-flags)
+    - [Environment variables](#environment-variables)
+    - [terragrunt](#terragrunt)
+
+
 Terraform install
 -----------------
 
@@ -95,3 +108,43 @@ External documentation
 ----------------------
 
 * [Azure kubernets](https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html)
+
+
+Set variables
+-------------
+
+### CLI flags
+
+```bash
+$ terraform plan   -var "vault_token=${VAULT_TOKEN}"
+```
+
+### Environment variables
+
+Use prefix "TF_VAR_" like this:
+
+```bash
+$ export TF_VAR_foo=bar
+```
+
+TF code:
+
+```
+variable "foo" {
+    type = string
+}
+
+provider "blub" {
+    username = var.foo
+}
+```
+
+### terragrunt
+
+With
+
+```
+inputs = {
+  user_name = "bar"
+}
+```
