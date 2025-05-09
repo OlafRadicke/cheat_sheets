@@ -12,5 +12,15 @@ USE
 ---
 
 ```bash
-$ tofo init
+$ tofu init
+```
+
+
+```bash
+$ tofu plan -var "vault_token=${VAULT_TOKEN}"
+```
+
+
+```bash
+$ tofu apply -var "vault_token=${VAULT_TOKEN}"
 ```
