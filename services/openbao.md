@@ -12,6 +12,7 @@ OpenBao
 			- [health check pki](#health-check-pki)
 			- [verify sign](#verify-sign)
 			- [list child issuers](#list-child-issuers)
+			- [sign intermediate](#sign-intermediate)
 
 
 LINKS
@@ -86,4 +87,10 @@ $ vault pki verify-sign pki_root/issuer/root pki_int/issuer/FirstDepartment
 ```bash
 $ PKI_PATH=pki_root_ca
 $ vault pki list-intermediates /${PKI_PATH}/issuer/default
+```
+
+#### sign intermediate
+
+```bash
+$ vault pki issue -issuer_name="FirstDepartment" /root_ca/issuer/default /policy_ca_02/ common_name="first-department.example.com"
 ```
