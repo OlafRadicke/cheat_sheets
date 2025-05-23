@@ -8,6 +8,10 @@ OpenBao
 		- [/etc/hosts](#etchosts)
 		- [Add openbao env variables](#add-openbao-env-variables)
 		- [Use vault cli](#use-vault-cli)
+			- [health check](#health-check)
+			- [health check pki](#health-check-pki)
+			- [verify sign](#verify-sign)
+			- [list child issuers](#list-child-issuers)
 
 
 LINKS
@@ -53,3 +57,33 @@ source ${HOME}/.ssh/openbao.env
 ```
 
 ### Use vault cli
+
+[Origen docu](https://developer.hashicorp.com/vault/docs/commands/pki)
+
+#### health check
+
+```bash
+$ vault status
+```
+
+
+#### health check pki
+
+
+```bash
+$ PKI_PATH=pki_root_ca
+
+$ vault pki health-check $PKI_PATH
+```
+
+#### verify sign
+
+```bash
+$ vault pki verify-sign pki_root/issuer/root pki_int/issuer/FirstDepartment
+```
+#### list child issuers
+
+```bash
+$ PKI_PATH=pki_root_ca
+$ vault pki list-intermediates /${PKI_PATH}/issuer/default
+```
