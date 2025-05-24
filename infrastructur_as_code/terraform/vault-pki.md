@@ -11,3 +11,4 @@ Das Terraform-Vault-Modul hat mehere schwächen:
 - Die Laufzeit einstellung der Zertifikate (ttl) zeigt keine Auswirkung.
 - Die CA Chain wird nicht korrekt erstellt für sub-CAs
 - CAs bekommen generisch-kryptische Namen. Das lässt sich nur für die Root-CA abstellen.
+- Die Terraform resource der sub-CA hat kein Fehler `issuer_id` die Ressource exportiert diese Info nicht. Die issuer_id muss manuell aus Vault abrufen werden.

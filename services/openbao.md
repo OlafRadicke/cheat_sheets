@@ -8,12 +8,13 @@ OpenBao
 	- [Pre step OpenBao / vault cli](#pre-step-openbao--vault-cli)
 		- [/etc/hosts](#etchosts)
 		- [Add openbao env variables](#add-openbao-env-variables)
-		- [Use vault cli](#use-vault-cli)
+	- [Use vault cli](#use-vault-cli)
 			- [health check](#health-check)
 			- [health check pki](#health-check-pki)
 			- [verify sign](#verify-sign)
 			- [list child issuers](#list-child-issuers)
 			- [sign intermediate](#sign-intermediate)
+	- [Use cli for creating a PKI](#use-cli-for-creating-a-pki)
 
 
 LINKS
@@ -64,7 +65,8 @@ Add this line in file `~/.bashrc`
 source ${HOME}/.ssh/openbao.env
 ```
 
-### Use vault cli
+Use vault cli
+-------------
 
 [Origen docu](https://developer.hashicorp.com/vault/docs/commands/pki)
 
@@ -101,3 +103,8 @@ $ vault pki list-intermediates /${PKI_PATH}/issuer/default
 ```bash
 $ vault pki issue -issuer_name="FirstDepartment" /root_ca/issuer/default /policy_ca_02/ common_name="first-department.example.com"
 ```
+
+Use cli for creating a PKI
+--------------------------
+
+See [Docu](https://developer.hashicorp.com/vault/docs/secrets/pki/quick-start-root-ca)
