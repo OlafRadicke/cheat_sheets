@@ -4,6 +4,7 @@ OpenBao
 - [OpenBao](#openbao)
 	- [LINKS](#links)
 	- [CLI](#cli)
+	- [ALTERNATIVES](#alternatives)
 	- [Pre step OpenBao / vault cli](#pre-step-openbao--vault-cli)
 		- [/etc/hosts](#etchosts)
 		- [Add openbao env variables](#add-openbao-env-variables)
@@ -29,6 +30,12 @@ CLI
 
 OpenBao have no cli package. See [issue](https://github.com/openbao/openbao/issues/162)
 Use vault cli
+
+
+ALTERNATIVES
+------------
+
+Low level alternatives to OpenBao as PKI: [smallstep](https://github.com/smallstep/certificates)
 
 Pre step OpenBao / vault cli
 ----------------------------
