@@ -15,6 +15,7 @@ OpenBao
 			- [list child issuers](#list-child-issuers)
 			- [sign intermediate](#sign-intermediate)
 	- [Use cli for creating a PKI](#use-cli-for-creating-a-pki)
+	- [PKI-TUTORAL](#pki-tutoral)
 
 
 LINKS
@@ -108,3 +109,8 @@ Use cli for creating a PKI
 --------------------------
 
 See [Docu](https://developer.hashicorp.com/vault/docs/secrets/pki/quick-start-root-ca)
+
+PKI-TUTORAL
+-----------
+
+PKI with Terraform and Vault [tutoral](https://developer.hashicorp.com/vault/tutorials/pki/pki-engine-external-ca)
