@@ -172,7 +172,7 @@ length: 40, \
 domains: 1:2:3:4:5:6:7:8:9:10:11:12:13:14:15:16, \
 sequence: 0, \
 origin: imported, \
-capabilities: change-authentication-key:create-otp-aead:[...]]: 
+capabilities: change-authentication-key:create-otp-aead:[...]]:
 ```
 
 
@@ -216,7 +216,7 @@ Stored Authentication key 0x9d17
                         -d 1 \
                         -i "0x9d17" \
                         -t "authentication-key" \
-                        -p "password" 
+                        -p "password"
 ```
 
 yubihsm> delete 1 0x0063 asymmetric-key
@@ -275,14 +275,14 @@ id: 0x0002, type: authentication-key, sequence: 0
                         -i "0x0001" \
                         -t "authentication-key" \
                         --authkey="0x0002"  \
-                        -p "password2" 
+                        -p "password2"
 
 Using default connector URL: http://127.0.0.1:12345
 Session keepalive set up to run every 15 seconds
 Created session 0
 
 
-[or@aug]$ yubihsm-shell -a put-authentication-key 
+[or@aug]$ yubihsm-shell -a put-authentication-key
                         -i "0x0003" \
                         -c 'all' \
                         -t "all" \
@@ -321,3 +321,4 @@ Documentatin und links
   * [yubihsm-shell](https://developers.yubico.com/yubihsm-shell/yubihsm-shell.html)
   * [Usage Guides](https://developers.yubico.com/YubiHSM2/Usage_Guides/)
   * [YubiHSM quick start tutorial](https://developers.yubico.com/YubiHSM2/Usage_Guides/YubiHSM_quick_start_tutorial.html)
+  * [hsm-2 user guide](https://docs.yubico.com/hardware/yubihsm-2/hsm-2-user-guide/index.html)
