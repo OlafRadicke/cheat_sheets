@@ -1,6 +1,12 @@
 Deployments
 ===========
 
+- [Deployments](#deployments)
+  - [Delete deployments](#delete-deployments)
+  - [Using a private image repository with secrets](#using-a-private-image-repository-with-secrets)
+
+
+
 ```bash
 kubectl create -f somthing.yaml
 ```

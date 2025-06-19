@@ -1,6 +1,16 @@
 Secrets
 =======
 
+- [Secrets](#secrets)
+  - [Create a secret](#create-a-secret)
+  - [Create secret as yaml file](#create-secret-as-yaml-file)
+  - [base64 encoding](#base64-encoding)
+  - [Get secrets](#get-secrets)
+  - [Pod that uses your Secret](#pod-that-uses-your-secret)
+  - [Apply registry secret to serviceaccount "default"](#apply-registry-secret-to-serviceaccount-default)
+  - [Delete a secret](#delete-a-secret)
+
+
 Create a secret
 ---------------
 
