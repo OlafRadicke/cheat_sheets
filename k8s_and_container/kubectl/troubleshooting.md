@@ -1,33 +1,29 @@
-Troubleshooting
-===============
+# Troubleshooting
 
 - [Troubleshooting](#troubleshooting)
-	- [Get a overview about nodes](#get-a-overview-about-nodes)
-	- [Get pod details](#get-pod-details)
-	- [Get details of all Pods](#get-details-of-all-pods)
-	- [Port forward](#port-forward)
-	- [Adhoc (network) checks](#adhoc-network-checks)
-	- [Get logs of http-application-routing](#get-logs-of-http-application-routing)
-	- [Attach on running pod](#attach-on-running-pod)
-	- [Attach on crashed pods](#attach-on-crashed-pods)
-		- [Get events](#get-events)
-	- [ImagePullBackOff](#imagepullbackoff)
-	- [Ingress](#ingress)
-	- [Kubernetes Namespaces stuck in Terminating status](#kubernetes-namespaces-stuck-in-terminating-status)
-	- [Kubernetes pod stuck in Terminating status](#kubernetes-pod-stuck-in-terminating-status)
-	- [Check image tags docker registy](#check-image-tags-docker-registy)
+  - [Get a overview about nodes](#get-a-overview-about-nodes)
+  - [Get pod details](#get-pod-details)
+  - [Get details of all Pods](#get-details-of-all-pods)
+  - [Get events](#get-events)
+  - [Port forward](#port-forward)
+  - [Adhoc (network) checks](#adhoc-network-checks)
+  - [Get logs of http-application-routing](#get-logs-of-http-application-routing)
+  - [Attach on running pod](#attach-on-running-pod)
+  - [Attach on crashed pods](#attach-on-crashed-pods)
+    - [Get events](#get-events-1)
+  - [ImagePullBackOff](#imagepullbackoff)
+  - [Ingress](#ingress)
+  - [Kubernetes Namespaces stuck in Terminating status](#kubernetes-namespaces-stuck-in-terminating-status)
+  - [Kubernetes pod stuck in Terminating status](#kubernetes-pod-stuck-in-terminating-status)
+  - [Check image tags docker registy](#check-image-tags-docker-registy)
 
-
-
-Get a overview about nodes
---------------------------
+## Get a overview about nodes
 
 ```bash
 kubectl describe node
 ```
 
-Get pod details
----------------
+## Get pod details
 
 ```bash
 kubectl describe pod lb-69967cfdb-jlsf5
@@ -38,8 +34,7 @@ kubectl describe pod lb-69967cfdb-jlsf5
 $ kubectl describe pod monitoring-677f86fcff-27mjl -n monitoring-01
 ```
 
-Get details of all Pods
------------------------
+## Get details of all Pods
 
 ```bash
 kubectl describe pods
@@ -49,8 +44,13 @@ kubectl describe pods
 $ kubectl get pods -o wide
 ```
 
-Port forward
-------------
+## Get events
+
+```bash
+Kubectl get events -n my-app
+```
+
+## Port forward
 
 ```bash
 export POD_NAME=$(kubectl get pods --namespace testenv -l "app=my-concourse-web" -o jsonpath="{.items[0].metadata.name}")
@@ -64,7 +64,6 @@ or alternative over service
 kubectl port-forward service/testenv 8080:80 -n testenv
 ```
 
-
 After this step visit now http://127.0.0.1:8080
 
 Is it on a remote host, open a new ssh connection with:
@@ -73,8 +72,7 @@ Is it on a remote host, open a new ssh connection with:
 ssh -L [LOCAL_IP:]LOCAL_PORT:DESTINATION:DESTINATION_PORT [USER@]SSH_SERVER
 ```
 
-Adhoc (network) checks
-----------------------
+## Adhoc (network) checks
 
 ```bash
 $ kubectl exec loadbalancer-85df47799d-94jms -- ping -c 1 10.0.224.30
@@ -85,16 +83,14 @@ PING 10.0.224.30 (10.0.224.30): 56 data bytes
 command terminated with exit code 1
 ```
 
-Get logs of http-application-routing
-------------------------------------
+## Get logs of http-application-routing
 
 ```bash
 kubectl logs -f deploy/
 
 ```
 
-Attach on running pod
----------------------
+## Attach on running pod
 
 ```bash
 kubectl exec -it my-pod-k8s-5cd4c85695-8lxlc sh
@@ -107,8 +103,7 @@ or
 $ kubectl exec -it [pod-name] -c [container-name] -n [namespace]  -- sh
 ```
 
-Attach on crashed pods
-----------------------
+## Attach on crashed pods
 
 ```bash
 $ kubectl run buildbot-demo --image=olafradicke/alternativ_buildbot_master:vv2.7.0r6 --restart=Never
@@ -130,7 +125,7 @@ buildbot.tac       http.log           master.cfg         master.cfg.sample  star
 /srv/buildbot $
 ```
 
-### Get events ###
+### Get events
 
 ```bash
 $ kubectl get events -n bla
@@ -143,9 +138,7 @@ LAST SEEN   TYPE      REASON               OBJECT                               
 10m         Normal    ScalingReplicaSet    deployment/influxdb                           Scaled up replica set influxdb-59fc9776bb to 1
 ```
 
-
-ImagePullBackOff
-----------------
+## ImagePullBackOff
 
 Pull image interactive
 
@@ -155,16 +148,13 @@ $ sudo crictl pull --creds "sp-ansible:XEHLwnCYayXXXXXXX"   "gitlab-01-01.room-d
 Image is up to date for sha256:0600ad29e4b4ea05fb1c80912356dbf305118924046af7b6d2904e64a6c58c78
 ```
 
-
-Ingress
--------
+## Ingress
 
 ```bash
 $ kubectl logs -l app=ingress-nginx --since 10m
 ```
 
-Kubernetes Namespaces stuck in Terminating status
--------------------------------------------------
+## Kubernetes Namespaces stuck in Terminating status
 
 ```bash
 NAMESPACE=hugo-operator-system ; \
@@ -173,9 +163,7 @@ kubectl get namespace $NAMESPACE -o json \
 | kubectl replace --raw "/api/v1/namespaces/$NAMESPACE/finalize" -f -
 ```
 
-Kubernetes pod stuck in Terminating status
-------------------------------------------
-
+## Kubernetes pod stuck in Terminating status
 
 ```bash
 kubectl delete pod xxxxx --grace-period=0  --force -n namespace
@@ -189,8 +177,7 @@ kubectl drain <node-name> --force --ignore-daemonsets  --delete-emptydir-data
 kubectl delete node <node-name>
 ```
 
-Check image tags docker registy
--------------------------------
+## Check image tags docker registy
 
 ```bash
 $ curl -X GET https://docker.edu-sharing.com/v2/community/common/edu_sharing-communit
