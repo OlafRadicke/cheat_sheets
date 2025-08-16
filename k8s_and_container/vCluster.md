@@ -1,5 +1,7 @@
 # vCluster
 
+Deploy a virtual Kubernetes cluster in a nativ Kubernetes with minimal effort.
+
 ## INSTALLATION
 
 ### CLIENT
