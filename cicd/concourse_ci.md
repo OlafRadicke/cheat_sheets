@@ -1,20 +1,19 @@
-Concourse ci
-============
+# Concourse ci
 
-Installation
-------------
+## Installation
 
 ``bash
 $ kubectl create namespace testenv
 $ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 $ helm repo add concourse github.com/concourse/concourse-chart
-```
+
+````
 Edit config file.
 
 ```bash
 $ helm show values concourse/concourse-chart > config.yaml
 $ helm install -f config.yaml -n testenv my-concourse  concourse/concourse-chart
-```
+````
 
 Install flay from https://github.com/concourse/concourse/releases/tag/v6.0.0
 
@@ -34,7 +33,7 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: {repository: busybox}
+  source: { repository: busybox }
 
 run:
   path: echo
@@ -50,14 +49,10 @@ Enter:
 
 ```
 
+## Links
 
-
-
-
-Links
------
-
-* [Projekt page](https://concourse-ci.org/)
-* [Helm chart](github.com/concourse/concourse-chart)
-* [Tutorial](https://concoursetutorial.com/basics/task-hello-world/)
-* [Resource types](https://github.com/concourse/resource-types)
+- [Projekt page](https://concourse-ci.org/)
+- [Helm chart](github.com/concourse/concourse-chart)
+- [Tutorial](https://concoursetutorial.com/basics/task-hello-world/)
+- [Resource types](https://github.com/concourse/resource-types)
+- [Docker image builds](https://github.com/concourse/oci-build-task)
