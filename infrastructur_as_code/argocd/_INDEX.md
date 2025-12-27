@@ -1,67 +1,56 @@
-ArgoCD
-======
+# ArgoCD
 
 - [ArgoCD](#argocd)
   - [Get password](#get-password)
   - [Connect web console](#connect-web-console)
   - [Use Helm Chart in a git repo](#use-helm-chart-in-a-git-repo)
   - [Known issue](#known-issue)
-    - [ArgoCD =\> ERR\_TOO\_MANY\_REDIRECTS](#argocd--err_too_many_redirects)
+    - [ArgoCD =\> ERR_TOO_MANY_REDIRECTS](#argocd--err_too_many_redirects)
+    - [Argocd application resource stuck at deletion](#argocd-application-resource-stuck-at-deletion)
   - [Links](#links)
   - [Waves](#waves)
   - [Trouble shooting](#trouble-shooting)
-    - [Argocd application resource stuck at deletion](#argocd-application-resource-stuck-at-deletion)
+    - [Argocd application resource stuck at deletion](#argocd-application-resource-stuck-at-deletion-1)
 
-
-
-Get password
-------------
+## Get password
 
 (default user admin)
-
 
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
-Connect web console
--------------------
+## Connect web console
 
 ```bash
 kubectl port-forward service/argocd-server -n argocd 8080:80
 ```
 
-Use Helm Chart in a git repo
-----------------------------
-
+## Use Helm Chart in a git repo
 
 ```yaml
 ---
-
-apiVersion:         argoproj.io/v1alpha1
-kind:               Application
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name:             firefish-quakers-social
-  namespace:        argocd
+  name: firefish-quakers-social
+  namespace: argocd
 spec:
-  project:          firefish-quakers-social
+  project: firefish-quakers-social
   source:
-    path:           chart
-    repoURL:        https://firefish.dev/iacore/firefish.git
+    path: chart
+    repoURL: https://firefish.dev/iacore/firefish.git
     targetRevision: develop
     helm:
       valuesObject:
         firefish:
           isManagedHosting: true
   destination:
-    server:         https://kubernetes.default.svc
-    namespace:      argocd-aoa
+    server: https://kubernetes.default.svc
+    namespace: argocd-aoa
 ```
 
-
-
-Known issue
------------
+## Known issue
 
 ### ArgoCD => ERR_TOO_MANY_REDIRECTS
 
@@ -99,7 +88,6 @@ data:
   server.insecure: "true"
 ```
 
-
 And enter for restart:
 
 ```bash
@@ -109,15 +97,18 @@ $ kubectl scale -n argocd deployment/argocd-server --replicas=0 && \
   kubectl scale -n argocd deployment/argocd-server --replicas=1
 ```
 
+### Argocd application resource stuck at deletion
 
-Links
------
+```bash
+kubectl patch application APP_NAME -p '{"metadata": {"finalizers": null}}' --type merge -n NAMESPACE_NAME
+
+```
+
+## Links
 
 - [Project documentaion](https://argo-cd.readthedocs.io/en/stable/)
 
-
-Waves
------
+## Waves
 
 Specify the wave using the following annotation:
 
@@ -134,12 +125,9 @@ When Argo CD starts a sync, it orders the resources in the following precedence:
 - By kind (e.g. namespaces first and then other Kubernetes resources, followed by custom resources)
 - By name
 
-
-Trouble shooting
-----------------
+## Trouble shooting
 
 ### Argocd application resource stuck at deletion
-
 
 ```bash
 $ kubectl patch app APP_NAME -p '{"metadata": {"finalizers": null}}' --type merge
