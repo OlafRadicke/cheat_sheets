@@ -30,13 +30,26 @@ apiVersion: pipelinesascode.tekton.dev/v1alpha1
 kind: Repository
 metadata:
   name: forgejo-olaf-test-repo
-  namespace: tekton-pipelines # same of PaC-Controller
+  namespace: pipelines-as-code # same of PaC-Controller
 spec:
   url: "http://localhost:8086/gitea_admin/teckton-pac-test" # your Forgejo-Repo-URL
 
   webhookSecret:
     name: pac-webhook-secret
     key: webhook-secret
+```
+
+Create secret:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pac-webhook-secret
+  namespace: pipelines-as-code
+type: Opaque
+stringData:
+  webhook-secret: "XXXChangeMeXXX"
 ```
 
 ## CREATE PIPELINE DEFINITION
@@ -113,6 +126,6 @@ or
 
 `/hook-Endpoint`
 
-Secret: exakt the same string of the webhook-secret.
+Secret (German "Geheimnis"): exakt the same string of the webhook-secret.
 
 Events: Push / Pull Request.
