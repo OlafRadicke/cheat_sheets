@@ -1,5 +1,11 @@
 ### INSTALLATION
 
+## BASIC INFOS
+
+- [Git-Repo](https://github.com/tektoncd)
+- [Pac - pipelinesascode](https://pipelinesascode.com/docs/install/kubernetes/)
+- [Git-Repo of Pac](https://github.com/openshift-pipelines/pipelines-as-code)
+
 ## WITH ARGOCD
 
 ```yaml
@@ -55,4 +61,12 @@ operator:
   # Defaults to "tekton-pipelines" for Kubernetes and to "openshift-pipelines" for Openshift flavor.
   defaultTargetNamespace: "tekton-operator"
   logLevel: info
+```
+
+## TROUBLESHOOTING
+
+### CHECK PAC INSTALLATION
+
+```bash
+$ kubectl get deployment -A | grep pipelines-as-code
 ```
