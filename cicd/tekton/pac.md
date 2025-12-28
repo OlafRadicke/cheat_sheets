@@ -1,5 +1,16 @@
 # PIPELINE AS CODE
 
+- [PIPELINE AS CODE](#pipeline-as-code)
+  - [BIG PICTURE](#big-picture)
+  - [CONFIGURE THE REPOSITORY](#configure-the-repository)
+  - [CREATE PIPELINE DEFINITION](#create-pipeline-definition)
+  - [CONFIGURE THE WEBHOOK In FORGEJO](#configure-the-webhook-in-forgejo)
+  - [DEBUGGING](#debugging)
+    - [PODS](#pods)
+    - [WEBHOOK](#webhook)
+      - [PaC‑Webhook‑Endpoint testen](#pacwebhookendpoint-testen)
+    - [PIPELINES](#pipelines)
+
 ## BIG PICTURE
 
 ```mermaid
@@ -129,3 +140,88 @@ or
 Secret (German "Geheimnis"): exakt the same string of the webhook-secret.
 
 Events: Push / Pull Request.
+
+## DEBUGGING
+
+### PODS
+
+```bash
+$ kubectl describe deploy pipelines-as-code-controller \
+  -n pipelines-as-code
+```
+
+```bash
+$ kubectl logs deploy/pipelines-as-code-controller \
+  -n pipelines-as-code -f
+```
+
+### WEBHOOK
+
+Check the logs:
+
+```bash
+$ kubectl logs -n pipelines-as-code deploy/pipelines-as
+-code-controller -f
+```
+
+#### PaC‑Webhook‑Endpoint testen
+
+```bash
+$ MY_NS=debugging-tools
+$ HOOK_ADDR='https://pipelines-as-code-webhook.pipelines-as-code.svc:443'
+$ SIG=xxxx
+```
+
+Einfacher Test:
+
+```bash
+$ kubectl exec -it \
+  $(
+    kubectl get pod \
+      -l app=debugger \
+      -o jsonpath='{.items[0].metadata.name}' \
+      -n ${MY_NS}) \
+   -n ${MY_NS} \
+  -- curl -v -I ${HOOK_ADDR}
+```
+
+```bash
+$ kubectl exec -it \
+  $(
+    kubectl get pod \
+      -l app=debugger \
+      -o jsonpath='{.items[0].metadata.name}' \
+      -n ${MY_NS}) \
+   -n ${MY_NS} \
+  -- curl \
+    -vk \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -H "X-Gitea-Event: push" \
+    -H "X-Gitea-Signature: ${SIG}" \
+    -d '{"ref":"refs/heads/main",
+    "repository": {"clone_url": "https://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test.git"}}' \
+    ${HOOK_ADDR}
+```
+
+```bash
+$ kubectl exec -it \
+  $(
+    kubectl get pod \
+      -l app=debugger \
+      -o jsonpath='{.items[0].metadata.name}' \
+      -n ${MY_NS}) \
+   -n ${MY_NS} \
+  -- curl \
+    -H "Content-Type: application/json" \
+    -k \
+    -X POST \
+    "${HOOK_ADDR}/" \
+    -d '{"repository":"repo","branch":"main","pipelinerun":"target-pipelinerun","secret":"pac-webhook-secret"}'
+```
+
+### PIPELINES
+
+```bash
+kubectl get pipelineruns -A
+```
