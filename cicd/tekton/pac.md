@@ -261,3 +261,7 @@ $ kubectl exec -it \
 ```bash
 kubectl get pipelineruns -A
 ```
+
+```bash
+$ kubectl describe pipelinerun example-forgejo-s89gk -n pipelines-as-code
+```
