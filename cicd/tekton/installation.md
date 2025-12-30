@@ -5,6 +5,17 @@
 - [Git-Repo](https://github.com/tektoncd)
 - [Pac - pipelinesascode](https://pipelinesascode.com/docs/install/kubernetes/)
 - [Git-Repo of Pac](https://github.com/openshift-pipelines/pipelines-as-code)
+- [Tekton-Catalog](https://github.com/tektoncd/catalog)
+
+## tkn-pac INSTALL
+
+Go to release Git-Repo of Pac download tar.gz-file, extract the file and copy it to `~/.local/bin/`
+
+Check installation:
+
+```bash
+$ tkn-pac info install
+```
 
 ## WITH ARGOCD
 

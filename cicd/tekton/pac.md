@@ -6,7 +6,9 @@
   - [CREATE PIPELINE DEFINITION](#create-pipeline-definition)
   - [CONFIGURE THE WEBHOOK In FORGEJO](#configure-the-webhook-in-forgejo)
   - [DEBUGGING](#debugging)
-    - [PODS](#pods)
+    - [TEST REPOSITORY CR WITH](#test-repository-cr-with)
+    - [PODS LOGS](#pods-logs)
+    - [CONFIGURE LOGGING](#configure-logging)
     - [WEBHOOK](#webhook)
       - [PaC‑Webhook‑Endpoint testen](#pacwebhookendpoint-testen)
     - [PIPELINES](#pipelines)
@@ -31,6 +33,8 @@ flowchart TD
   step03 --> step04
   step04 --> step05
 ```
+
+For airgap system you can use [gosmee](https://github.com/chmouel/gosmee).
 
 ## CONFIGURE THE REPOSITORY
 
@@ -143,7 +147,18 @@ Events: Push / Pull Request.
 
 ## DEBUGGING
 
-### PODS
+### TEST REPOSITORY CR WITH
+
+```bash
+$ tkn-pac resolve \
+  -f cicd/tekton/.tekton/PipelineRun-example-forgejo.yaml \
+  -o /tmp/PipelineRun-example-forgejo.yaml \
+  && kubectl create \
+  -f /tmp/PipelineRun-example-forgejo.yaml \
+  -n pipelines-as-code
+```
+
+### PODS LOGS
 
 ```bash
 $ kubectl describe deploy pipelines-as-code-controller \
@@ -154,6 +169,26 @@ $ kubectl describe deploy pipelines-as-code-controller \
 $ kubectl logs deploy/pipelines-as-code-controller \
   -n pipelines-as-code -f
 ```
+
+### CONFIGURE LOGGING
+
+```bash
+$ kubectl get configmap pac-config-logging \
+    -n pipelines-as-code \
+    -o yaml
+```
+
+Patch log level:
+
+```bash
+$ kubectl patch configmap pac-config-logging -n pipelines-as-code --type json -p '[{"op": "replace", "path": "/data/loglevel.pac-watcher", "value":"debug"}]'
+
+$ kubectl patch configmap pac-config-logging -n pipelines-as-code --type json -p '[{"op": "replace", "path": "/data/loglevel.pipelines-as-code-webhook", "value":"debug"}]'
+
+$ kubectl patch configmap pac-config-logging -n pipelines-as-code --type json -p '[{"op": "replace", "path": "/data/loglevel.pipelinesascode", "value":"debug"}]'
+```
+
+See too: https://github.com/openshift-pipelines/pipelines-as-code/blob/main/docs/content/docs/install/logging.md
 
 ### WEBHOOK
 
@@ -169,6 +204,7 @@ $ kubectl logs -n pipelines-as-code deploy/pipelines-as
 ```bash
 $ MY_NS=debugging-tools
 $ HOOK_ADDR='https://pipelines-as-code-webhook.pipelines-as-code.svc:443'
+$ HOOK_ADDR='http://pipelines-as-code-controller.pipelines-as-code.svc:8080/incoming'
 $ SIG=xxxx
 ```
 
@@ -217,7 +253,7 @@ $ kubectl exec -it \
     -k \
     -X POST \
     "${HOOK_ADDR}/" \
-    -d '{"repository":"repo","branch":"main","pipelinerun":"target-pipelinerun","secret":"pac-webhook-secret"}'
+    -d '{"repository":"repo","branch":"main","pipelinerun":"target-pipelinerun","secret":"pac-webhook-secret", "clone_url": "https://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test.git"}'
 ```
 
 ### PIPELINES
