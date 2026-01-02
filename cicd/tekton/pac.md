@@ -10,8 +10,10 @@
     - [PODS LOGS](#pods-logs)
     - [CONFIGURE LOGGING](#configure-logging)
     - [WEBHOOK](#webhook)
-      - [PaC‑Webhook‑Endpoint testen](#pacwebhookendpoint-testen)
+      - [Testing PaC‑Webhook‑Endpoints](#testing-pacwebhookendpoints)
     - [PIPELINES](#pipelines)
+  - [KNOWN ISSUES](#known-issues)
+    - [invalid JSON body for incoming webhook](#invalid-json-body-for-incoming-webhook)
 
 ## BIG PICTURE
 
@@ -142,7 +144,7 @@ spec:
 
 ## CONFIGURE THE WEBHOOK In FORGEJO
 
-![codeberg config](codeberg-screenshot.png)
+![codeberg config](.pics/codeberg-screenshot.png)
 
 In the Forgejo repo:
 
@@ -214,7 +216,7 @@ $ kubectl logs -n pipelines-as-code deploy/pipelines-as
 -code-controller -f
 ```
 
-#### PaC‑Webhook‑Endpoint testen
+#### Testing PaC‑Webhook‑Endpoints
 
 ```bash
 $ MY_NS=debugging-tools
@@ -280,3 +282,18 @@ kubectl get pipelineruns -A
 ```bash
 $ kubectl describe pipelinerun example-forgejo-s89gk -n pipelines-as-code
 ```
+
+## KNOWN ISSUES
+
+### invalid JSON body for incoming webhook
+
+If you add a new web hook in the webinterface of forgejo and you get this error in the log:
+
+```bash
+{"level":"info","ts":"2026-01-02T16:33:16.531Z","logger":"pipelinesascode","caller":"adapter/incoming.go:120","msg":"incoming request has been requested: /incoming","commit":"bb4933c"}
+{"level":"error","ts":"2026-01-02T16:33:16.531Z","logger":"pipelinesascode","caller":"adapter/adapter.go:178","msg":"error processing incoming webhook: invalid JSON body for incoming webhook: json: cannot unmarshal object into Go struct field incomingPayload.repository of type string","commit":"bb4933c","stacktrace":"github.com/openshift-pipelines/pipelines-as-code/pkg/adapter.(*listener).Start.listener.handleEvent.func2\n\tgithub.com/openshift-pipelines/pipelines-as-code/pkg/adapter/adapter.go:178\nnet/http.HandlerFunc.ServeHTTP\n\tnet/http/server.go:2294\nnet/http.(*ServeMux).ServeHTTP\n\tnet/http/server.go:2822\nnet/http.(*timeoutHandler).ServeHTTP.func1\n\tnet/http/server.go:3827"}
+```
+
+Than you choice the wrong repo typ in the hook.
+
+![The right choice](.pics/git-repo-type.png)
