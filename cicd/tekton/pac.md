@@ -60,11 +60,24 @@ Create secret:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: pac-webhook-secret
+  name: pac-webhook-token-secret
   namespace: pipelines-as-code
 type: Opaque
 stringData:
   webhook-secret: "XXXChangeMeXXX"
+```
+
+For the git clones:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pac-git-token-secret
+  namespace: pipelines-as-code
+type: Opaque
+stringData:
+  token: "e5f9XXXXXXXXXX"
 ```
 
 ## CREATE PIPELINE DEFINITION
@@ -128,6 +141,8 @@ spec:
 ```
 
 ## CONFIGURE THE WEBHOOK In FORGEJO
+
+![codeberg config](codeberg-screenshot.png)
 
 In the Forgejo repo:
 

@@ -6,6 +6,7 @@
 - [Pac - pipelinesascode](https://pipelinesascode.com/docs/install/kubernetes/)
 - [Git-Repo of Pac](https://github.com/openshift-pipelines/pipelines-as-code)
 - [Tekton-Catalog](https://github.com/tektoncd/catalog)
+- [Git-Repo dashboard](https://github.com/tektoncd/dashboard/blob/main/releases.md)
 
 ## tkn-pac INSTALL
 
