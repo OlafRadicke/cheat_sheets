@@ -14,6 +14,7 @@
     - [PIPELINES](#pipelines)
   - [KNOWN ISSUES](#known-issues)
     - [invalid JSON body for incoming webhook](#invalid-json-body-for-incoming-webhook)
+    - [cannot find referenced task](#cannot-find-referenced-task)
 
 ## BIG PICTURE
 
@@ -297,3 +298,15 @@ If you add a new web hook in the webinterface of forgejo and you get this error 
 Than you choice the wrong repo typ in the hook.
 
 ![The right choice](.pics/git-repo-type.png)
+
+### cannot find referenced task
+
+Logs:
+
+```bash
+{"level":"error","ts":"2026-01-07T13:57:38.720Z","logger":"pipelinesascode","caller":"events/emit.go:49","msg":"an error occurred: cannot find referenced task git-clone. if it's a remote task make sure to add it in the annotations","commit":"bb4933c","provider":"gitea","event-id":"b965f393-8e91-4fa3-a5fd-08c632e4cd0c","event-sha":"951918d3d62686bb35a99a09867e9b01933b9876","event-type":"push","source-repo-url":"http://forgejo-http.forgejo:3000/gitea_admin/teckton-pac-test","target-branch":"refs/heads/main","namespace":"pipelines-as-code","stacktrace":"github.com/openshift-pipelines/pipelines-as-code/pkg/events.(*EventEmitter).EmitMessage\n\tgithub.com/openshift-pipelines/pipelines-as-code/pkg/events/emit.go:49\ngithub.com/openshift-pipelines/pipelines-as-code/pkg/pipelineascode.(*PacRun).Run\n\tgithub.com/openshift-pipelines/pipelines-as-code/pkg/pipelineascode/pipelineascode.go:81\ngithub.com/openshift-pipelines/pipelines-as-code/pkg/adapter.(*sinker).processEvent\n\tgithub.com/openshift-pipelines/pipelines-as-code/pkg/adapter/sinker.go:75\ngithub.com/openshift-pipelines/pipelines-as-code/pkg/adapter.(*listener).Start.listener.handleEvent.func2.1\n\tgithub.com/openshift-pipelines/pipelines-as-code/pkg/adapter/adapter.go:210"}
+```
+
+And is your file name lik this:
+
+`.tekton/PipelineRun-example-forgejo.yaml` than it is an kown issue. It is not documented but PaC ignores files with **uppercase letters** in the filename.
