@@ -9,6 +9,8 @@
     - [TEST REPOSITORY CR WITH](#test-repository-cr-with)
     - [PODS LOGS](#pods-logs)
     - [CONFIGURE LOGGING](#configure-logging)
+      - [Patch log level:](#patch-log-level)
+      - [Labling logs](#labling-logs)
     - [WEBHOOK](#webhook)
       - [Testing PaC‑Webhook‑Endpoints](#testing-pacwebhookendpoints)
     - [PIPELINES](#pipelines)
@@ -196,7 +198,7 @@ $ kubectl get configmap pac-config-logging \
     -o yaml
 ```
 
-Patch log level:
+#### Patch log level:
 
 ```bash
 $ kubectl patch configmap pac-config-logging -n pipelines-as-code --type json -p '[{"op": "replace", "path": "/data/loglevel.pac-watcher", "value":"debug"}]'
@@ -208,13 +210,30 @@ $ kubectl patch configmap pac-config-logging -n pipelines-as-code --type json -p
 
 See too: https://github.com/openshift-pipelines/pipelines-as-code/blob/main/docs/content/docs/install/logging.md
 
+#### Labling logs
+
+Add a lable:
+
+```yaml
+metadata:
+  labels:
+    pac-debug: "true"
+```
+
+and grap:
+
+```bash
+$ kubectl logs -n pipelines-as-code deploy/pipelines-as-code-controller \
+  | grep pac-debug
+```
+
 ### WEBHOOK
 
 Check the logs:
 
 ```bash
-$ kubectl logs -n pipelines-as-code deploy/pipelines-as
--code-controller -f
+$ kubectl logs  deploy/pipelines-as-code-controller -f \
+-n pipelines-as-code
 ```
 
 #### Testing PaC‑Webhook‑Endpoints
@@ -278,6 +297,12 @@ $ kubectl exec -it \
 
 ```bash
 kubectl get pipelineruns -A
+```
+
+```bash
+kubectl get pipelinerun -n pipelines-as-code
+kubectl get taskrun -n pipelines-as-code
+kubectl get pods -n pipelines-as-code
 ```
 
 ```bash
